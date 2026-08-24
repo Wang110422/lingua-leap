@@ -65,7 +65,7 @@ export function AppSidebar() {
   }, [isProfileOpen]);
 
   return (
-    <aside className="hidden w-[260px] shrink-0 flex-col bg-sidebar px-4 py-5 text-sidebar-foreground lg:flex">
+    <aside className="sticky top-0 hidden h-screen w-[260px] shrink-0 flex-col overflow-y-auto bg-sidebar px-4 py-5 text-sidebar-foreground lg:flex">
       <Link to="/" className="mb-8 flex items-center gap-3 px-2">
         <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-sidebar-primary text-sidebar-primary-foreground">
           <BookOpenText className="h-6 w-6" />
