@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExamsRouteImport } from './routes/exams'
+import { Route as MockTestRouteImport } from './routes/mock-test'
 import { Route as PracticeRouteImport } from './routes/practice'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ScanRouteImport } from './routes/scan'
@@ -28,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 const ExamsRoute = ExamsRouteImport.update({
   id: '/exams',
   path: '/exams',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MockTestRoute = MockTestRouteImport.update({
+  id: '/mock-test',
+  path: '/mock-test',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PracticeRoute = PracticeRouteImport.update({
@@ -74,6 +80,7 @@ const LibraryFolderIdRoute = LibraryFolderIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/exams': typeof ExamsRoute
+  '/mock-test': typeof MockTestRoute
   '/practice': typeof PracticeRoute
   '/roadmap': typeof RoadmapRoute
   '/scan': typeof ScanRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/exams': typeof ExamsRoute
+  '/mock-test': typeof MockTestRoute
   '/practice': typeof PracticeRoute
   '/roadmap': typeof RoadmapRoute
   '/scan': typeof ScanRoute
@@ -99,6 +107,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/exams': typeof ExamsRoute
+  '/mock-test': typeof MockTestRoute
   '/practice': typeof PracticeRoute
   '/roadmap': typeof RoadmapRoute
   '/scan': typeof ScanRoute
@@ -113,6 +122,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/exams'
+    | '/mock-test'
     | '/practice'
     | '/roadmap'
     | '/scan'
@@ -125,6 +135,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/exams'
+    | '/mock-test'
     | '/practice'
     | '/roadmap'
     | '/scan'
@@ -137,6 +148,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/exams'
+    | '/mock-test'
     | '/practice'
     | '/roadmap'
     | '/scan'
@@ -150,6 +162,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExamsRoute: typeof ExamsRoute
+  MockTestRoute: typeof MockTestRoute
   PracticeRoute: typeof PracticeRoute
   RoadmapRoute: typeof RoadmapRoute
   ScanRoute: typeof ScanRoute
@@ -174,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/exams'
       fullPath: '/exams'
       preLoaderRoute: typeof ExamsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mock-test': {
+      id: '/mock-test'
+      path: '/mock-test'
+      fullPath: '/mock-test'
+      preLoaderRoute: typeof MockTestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/practice': {
@@ -238,6 +258,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExamsRoute: ExamsRoute,
+  MockTestRoute: MockTestRoute,
   PracticeRoute: PracticeRoute,
   RoadmapRoute: RoadmapRoute,
   ScanRoute: ScanRoute,
