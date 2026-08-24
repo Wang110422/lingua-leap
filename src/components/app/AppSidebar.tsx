@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   Home,
@@ -7,13 +8,16 @@ import {
   ScanLine,
   Trash2,
   BookOpenText,
-  Crown,
-  HelpCircle,
-  Settings,
-  LogOut,
   Dumbbell,
   FileText,
   Timer,
+  User,
+  Settings,
+  Monitor,
+  HelpCircle,
+  Mail,
+  LogOut,
+  ChevronRight,
 } from "lucide-react";
 
 const items = [
@@ -28,17 +32,37 @@ const items = [
   { to: "/trash", label: "Đã xóa", icon: Trash2 },
 ];
 
-
-const secondaryItems = [
-  { label: "Trợ giúp", icon: HelpCircle },
-  { label: "Cài đặt", icon: Settings },
+const profileMenuItems = [
+  { label: "Hồ sơ cá nhân", icon: User },
+  { label: "Giao diện màn hình", icon: Monitor, hasArrow: true },
+  { label: "Cài đặt", icon: Settings, shortcut: "Ctrl." },
+  { label: "Trợ giúp", icon: HelpCircle, hasArrow: true },
+  { label: "Liên hệ", icon: Mail, hasArrow: true },
   { label: "Đăng xuất", icon: LogOut },
 ];
 
 export function AppSidebar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null);
 
   const isActive = (to: string) => (to === "/" ? pathname === "/" : pathname.startsWith(to));
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
+        setIsProfileOpen(false);
+      }
+    }
+
+    if (isProfileOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isProfileOpen]);
 
   return (
     <aside className="hidden w-[260px] shrink-0 flex-col bg-sidebar px-4 py-5 text-sidebar-foreground lg:flex">
@@ -71,40 +95,55 @@ export function AppSidebar() {
         ))}
       </nav>
 
-      <div className="mt-6 rounded-2xl border border-sidebar-border bg-sidebar-accent/70 p-4 text-center">
-        <span className="block text-[11px] font-semibold uppercase tracking-[0.16em] text-sidebar-foreground/65">
-          LingoMaster Pro
-        </span>
+      <div className="relative mt-auto pt-4" ref={profileRef}>
         <button
           type="button"
-          className="mt-3 inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl bg-sidebar-primary text-sm font-bold text-sidebar-primary-foreground shadow-pop transition hover:opacity-90"
+          onClick={() => setIsProfileOpen((prev) => !prev)}
+          className={`flex w-full items-center gap-3 rounded-2xl p-3 transition-colors ${
+            isProfileOpen ? "bg-sidebar-accent" : "hover:bg-sidebar-accent"
+          }`}
         >
-          <Crown className="h-4 w-4" />
-          Nâng cấp Pro
-        </button>
-      </div>
-
-      <div className="mt-auto flex flex-col gap-1 border-t border-sidebar-border pt-4">
-        {secondaryItems.map((item) => (
-          <button
-            key={item.label}
-            type="button"
-            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-          >
-            <item.icon className="h-[18px] w-[18px]" />
-            {item.label}
-          </button>
-        ))}
-
-        <div className="mt-3 flex items-center gap-3 rounded-2xl bg-sidebar-accent p-3">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-sidebar-primary bg-sidebar font-display font-bold text-sidebar-foreground">
             C
           </span>
-          <span className="min-w-0">
+          <span className="min-w-0 flex-1 text-left">
             <span className="block truncate text-sm font-semibold">Chan Wo Sin</span>
             <span className="block text-[11px] text-sidebar-foreground/60">Bản Pro</span>
           </span>
-        </div>
+        </button>
+
+        {isProfileOpen && (
+          <div className="absolute bottom-4 left-[calc(260px-1rem)] z-50 w-[260px] overflow-hidden rounded-2xl border border-sidebar-border bg-[#1e1e1e] p-2 shadow-2xl">
+            <div className="flex items-center gap-3 border-b border-sidebar-border px-3 pb-3 pt-1">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sidebar-primary font-display font-bold text-sidebar-primary-foreground">
+                C
+              </span>
+              <span className="min-w-0">
+                <span className="block truncate text-sm font-semibold text-sidebar-foreground">Chan Wo Sin</span>
+                <span className="block text-[11px] text-sidebar-foreground/60">quangoke34@gmail.com</span>
+              </span>
+            </div>
+
+            <div className="flex flex-col py-1">
+              {profileMenuItems.map((item) => (
+                <button
+                  key={item.label}
+                  type="button"
+                  className="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-sidebar-foreground/90 transition-colors hover:bg-sidebar-accent hover:text-sidebar-foreground"
+                >
+                  <item.icon className="h-[18px] w-[18px] text-sidebar-foreground/70 group-hover:text-sidebar-foreground" />
+                  <span className="flex-1 text-left">{item.label}</span>
+                  {item.shortcut && (
+                    <span className="text-xs text-sidebar-foreground/50">{item.shortcut}</span>
+                  )}
+                  {item.hasArrow && (
+                    <ChevronRight className="h-4 w-4 text-sidebar-foreground/50" />
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </aside>
   );
