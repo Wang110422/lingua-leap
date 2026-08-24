@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RoadmapRouteImport } from './routes/roadmap'
+import { Route as ScanRouteImport } from './routes/scan'
+import { Route as TrashRouteImport } from './routes/trash'
+import { Route as GroupsIndexRouteImport } from './routes/groups.index'
+import { Route as GroupsGroupIdRouteImport } from './routes/groups.$groupId'
+import { Route as LibraryIndexRouteImport } from './routes/library.index'
+import { Route as LibraryFolderIdRouteImport } from './routes/library.$folderId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RoadmapRoute = RoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScanRoute = ScanRouteImport.update({
+  id: '/scan',
+  path: '/scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrashRoute = TrashRouteImport.update({
+  id: '/trash',
+  path: '/trash',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GroupsIndexRoute = GroupsIndexRouteImport.update({
+  id: '/groups/',
+  path: '/groups/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GroupsGroupIdRoute = GroupsGroupIdRouteImport.update({
+  id: '/groups/$groupId',
+  path: '/groups/$groupId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LibraryIndexRoute = LibraryIndexRouteImport.update({
+  id: '/library/',
+  path: '/library/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LibraryFolderIdRoute = LibraryFolderIdRouteImport.update({
+  id: '/library/$folderId',
+  path: '/library/$folderId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/roadmap': typeof RoadmapRoute
+  '/scan': typeof ScanRoute
+  '/trash': typeof TrashRoute
+  '/groups/$groupId': typeof GroupsGroupIdRoute
+  '/library/$folderId': typeof LibraryFolderIdRoute
+  '/groups/': typeof GroupsIndexRoute
+  '/library/': typeof LibraryIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/roadmap': typeof RoadmapRoute
+  '/scan': typeof ScanRoute
+  '/trash': typeof TrashRoute
+  '/groups/$groupId': typeof GroupsGroupIdRoute
+  '/library/$folderId': typeof LibraryFolderIdRoute
+  '/groups': typeof GroupsIndexRoute
+  '/library': typeof LibraryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/roadmap': typeof RoadmapRoute
+  '/scan': typeof ScanRoute
+  '/trash': typeof TrashRoute
+  '/groups/$groupId': typeof GroupsGroupIdRoute
+  '/library/$folderId': typeof LibraryFolderIdRoute
+  '/groups/': typeof GroupsIndexRoute
+  '/library/': typeof LibraryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/roadmap'
+    | '/scan'
+    | '/trash'
+    | '/groups/$groupId'
+    | '/library/$folderId'
+    | '/groups/'
+    | '/library/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/roadmap'
+    | '/scan'
+    | '/trash'
+    | '/groups/$groupId'
+    | '/library/$folderId'
+    | '/groups'
+    | '/library'
+  id:
+    | '__root__'
+    | '/'
+    | '/roadmap'
+    | '/scan'
+    | '/trash'
+    | '/groups/$groupId'
+    | '/library/$folderId'
+    | '/groups/'
+    | '/library/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RoadmapRoute: typeof RoadmapRoute
+  ScanRoute: typeof ScanRoute
+  TrashRoute: typeof TrashRoute
+  GroupsGroupIdRoute: typeof GroupsGroupIdRoute
+  LibraryFolderIdRoute: typeof LibraryFolderIdRoute
+  GroupsIndexRoute: typeof GroupsIndexRoute
+  LibraryIndexRoute: typeof LibraryIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/roadmap': {
+      id: '/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scan': {
+      id: '/scan'
+      path: '/scan'
+      fullPath: '/scan'
+      preLoaderRoute: typeof ScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trash': {
+      id: '/trash'
+      path: '/trash'
+      fullPath: '/trash'
+      preLoaderRoute: typeof TrashRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/groups/': {
+      id: '/groups/'
+      path: '/groups'
+      fullPath: '/groups/'
+      preLoaderRoute: typeof GroupsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/groups/$groupId': {
+      id: '/groups/$groupId'
+      path: '/groups/$groupId'
+      fullPath: '/groups/$groupId'
+      preLoaderRoute: typeof GroupsGroupIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/library/': {
+      id: '/library/'
+      path: '/library'
+      fullPath: '/library/'
+      preLoaderRoute: typeof LibraryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/library/$folderId': {
+      id: '/library/$folderId'
+      path: '/library/$folderId'
+      fullPath: '/library/$folderId'
+      preLoaderRoute: typeof LibraryFolderIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RoadmapRoute: RoadmapRoute,
+  ScanRoute: ScanRoute,
+  TrashRoute: TrashRoute,
+  GroupsGroupIdRoute: GroupsGroupIdRoute,
+  LibraryFolderIdRoute: LibraryFolderIdRoute,
+  GroupsIndexRoute: GroupsIndexRoute,
+  LibraryIndexRoute: LibraryIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
