@@ -1,5 +1,17 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, Users, Library, Route as RouteIcon, ScanLine, Trash2, Bell, BookOpenText } from "lucide-react";
+import {
+  Home,
+  Users,
+  Library,
+  Route as RouteIcon,
+  ScanLine,
+  Trash2,
+  BookOpenText,
+  Crown,
+  HelpCircle,
+  Settings,
+  LogOut,
+} from "lucide-react";
 
 const items = [
   { to: "/", label: "Trang chủ", icon: Home },
@@ -8,6 +20,12 @@ const items = [
   { to: "/roadmap", label: "Lộ trình học", icon: RouteIcon },
   { to: "/scan", label: "Quét tài liệu", icon: ScanLine },
   { to: "/trash", label: "Đã xóa", icon: Trash2 },
+];
+
+const secondaryItems = [
+  { label: "Trợ giúp", icon: HelpCircle },
+  { label: "Cài đặt", icon: Settings },
+  { label: "Đăng xuất", icon: LogOut },
 ];
 
 export function AppSidebar() {
@@ -46,22 +64,40 @@ export function AppSidebar() {
         ))}
       </nav>
 
-      <div className="mt-auto flex items-center gap-3 rounded-2xl bg-sidebar-accent p-3">
+      <div className="mt-6 rounded-2xl border border-sidebar-border bg-sidebar-accent/70 p-4 text-center">
+        <span className="block text-[11px] font-semibold uppercase tracking-[0.16em] text-sidebar-foreground/65">
+          LingoMaster Pro
+        </span>
         <button
           type="button"
-          aria-label="Thông báo"
-          className="relative flex h-10 w-10 items-center justify-center rounded-full bg-sidebar/60 text-sidebar-foreground/80 transition-colors hover:text-sidebar-accent-foreground"
+          className="mt-3 inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl bg-sidebar-primary text-sm font-bold text-sidebar-primary-foreground shadow-pop transition hover:opacity-90"
         >
-          <Bell className="h-[18px] w-[18px]" />
-          <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-destructive" />
+          <Crown className="h-4 w-4" />
+          Nâng cấp Pro
         </button>
-        <span className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-sidebar-primary bg-sidebar font-display font-bold text-sidebar-foreground">
-          C
-        </span>
-        <span className="min-w-0">
-          <span className="block truncate text-sm font-semibold">Chan Wo Sin</span>
-          <span className="block text-[11px] text-sidebar-foreground/60">Bản Pro</span>
-        </span>
+      </div>
+
+      <div className="mt-auto flex flex-col gap-1 border-t border-sidebar-border pt-4">
+        {secondaryItems.map((item) => (
+          <button
+            key={item.label}
+            type="button"
+            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-sidebar-foreground/70 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+          >
+            <item.icon className="h-[18px] w-[18px]" />
+            {item.label}
+          </button>
+        ))}
+
+        <div className="mt-3 flex items-center gap-3 rounded-2xl bg-sidebar-accent p-3">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-sidebar-primary bg-sidebar font-display font-bold text-sidebar-foreground">
+            C
+          </span>
+          <span className="min-w-0">
+            <span className="block truncate text-sm font-semibold">Chan Wo Sin</span>
+            <span className="block text-[11px] text-sidebar-foreground/60">Bản Pro</span>
+          </span>
+        </div>
       </div>
     </aside>
   );

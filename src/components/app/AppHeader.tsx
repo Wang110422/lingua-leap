@@ -20,9 +20,10 @@ export function AppHeader() {
         <button
           type="button"
           aria-label="Thông báo"
-          className="relative flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:text-foreground lg:hidden"
+          className="relative flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
         >
           <Bell className="h-[18px] w-[18px]" />
+          <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-destructive" />
         </button>
         <button
           type="button"
@@ -32,6 +33,7 @@ export function AppHeader() {
           Tạo mới
         </button>
       </div>
+
     </header>
   );
 }
