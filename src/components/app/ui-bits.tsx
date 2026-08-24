@@ -31,7 +31,7 @@ export function Pill({
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${toneMap[tone] ?? toneMap.primary} ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${toneMap[tone] ?? toneMap['primary']} ${className}`}
     >
       {children}
     </span>
