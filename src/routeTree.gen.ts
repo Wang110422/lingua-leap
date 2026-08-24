@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GroupsIndexRouteImport } from './routes/groups.index'
+import { Route as GroupsGroupIdRouteImport } from './routes/groups.$groupId'
+import { Route as LibraryIndexRouteImport } from './routes/library.index'
+import { Route as LibraryFolderIdRouteImport } from './routes/library.$folderId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +25,65 @@ const GroupsIndexRoute = GroupsIndexRouteImport.update({
   path: '/groups/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GroupsGroupIdRoute = GroupsGroupIdRouteImport.update({
+  id: '/groups/$groupId',
+  path: '/groups/$groupId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LibraryIndexRoute = LibraryIndexRouteImport.update({
+  id: '/library/',
+  path: '/library/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LibraryFolderIdRoute = LibraryFolderIdRouteImport.update({
+  id: '/library/$folderId',
+  path: '/library/$folderId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/groups/$groupId': typeof GroupsGroupIdRoute
+  '/library/$folderId': typeof LibraryFolderIdRoute
   '/groups/': typeof GroupsIndexRoute
+  '/library/': typeof LibraryIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/groups/$groupId': typeof GroupsGroupIdRoute
+  '/library/$folderId': typeof LibraryFolderIdRoute
   '/groups': typeof GroupsIndexRoute
+  '/library': typeof LibraryIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/groups/$groupId': typeof GroupsGroupIdRoute
+  '/library/$folderId': typeof LibraryFolderIdRoute
   '/groups/': typeof GroupsIndexRoute
+  '/library/': typeof LibraryIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/groups/'
+  fullPaths:
+    '/' | '/groups/$groupId' | '/library/$folderId' | '/groups/' | '/library/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/groups'
-  id: '__root__' | '/' | '/groups/'
+  to: '/' | '/groups/$groupId' | '/library/$folderId' | '/groups' | '/library'
+  id:
+    | '__root__'
+    | '/'
+    | '/groups/$groupId'
+    | '/library/$folderId'
+    | '/groups/'
+    | '/library/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GroupsGroupIdRoute: typeof GroupsGroupIdRoute
+  LibraryFolderIdRoute: typeof LibraryFolderIdRoute
   GroupsIndexRoute: typeof GroupsIndexRoute
+  LibraryIndexRoute: typeof LibraryIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +102,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GroupsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/groups/$groupId': {
+      id: '/groups/$groupId'
+      path: '/groups/$groupId'
+      fullPath: '/groups/$groupId'
+      preLoaderRoute: typeof GroupsGroupIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/library/': {
+      id: '/library/'
+      path: '/library'
+      fullPath: '/library/'
+      preLoaderRoute: typeof LibraryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/library/$folderId': {
+      id: '/library/$folderId'
+      path: '/library/$folderId'
+      fullPath: '/library/$folderId'
+      preLoaderRoute: typeof LibraryFolderIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GroupsGroupIdRoute: GroupsGroupIdRoute,
+  LibraryFolderIdRoute: LibraryFolderIdRoute,
   GroupsIndexRoute: GroupsIndexRoute,
+  LibraryIndexRoute: LibraryIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
