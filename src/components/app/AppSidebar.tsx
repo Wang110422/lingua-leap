@@ -95,11 +95,11 @@ export function AppSidebar() {
         ))}
       </nav>
 
-      <div className="mt-auto pt-4" ref={profileRef}>
+      <div className="relative mt-auto pt-4" ref={profileRef}>
         <button
           type="button"
           onClick={() => setIsProfileOpen((prev) => !prev)}
-          className={`relative flex w-full items-center gap-3 rounded-2xl p-3 transition-colors ${
+          className={`flex w-full items-center gap-3 rounded-2xl p-3 transition-colors ${
             isProfileOpen ? "bg-sidebar-accent" : "hover:bg-sidebar-accent"
           }`}
         >
