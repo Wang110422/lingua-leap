@@ -1,9 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CalendarDays, Bell, Trophy, Flame, Play, MoreHorizontal, Medal } from "lucide-react";
+import {
+  Play,
+  MoreHorizontal,
+  Sparkles,
+  ArrowRight,
+  PenLine,
+  Mic,
+  MessageCircle,
+} from "lucide-react";
 
 import { SectionTitle } from "@/components/app/PageHeader";
-import { Avatar, EmojiTile, Pill, Progress } from "@/components/app/ui-bits";
-import { cardSets, classUpdates, currentUser, homeStats, leaderboard, reviewCard, roadmaps } from "@/data/mock";
+import { EmojiTile, Pill, Progress } from "@/components/app/ui-bits";
+import { cardSets, currentUser, homeStats, roadmaps } from "@/data/mock";
 
 export const Route = createFileRoute("/")({
   head: () => ({
