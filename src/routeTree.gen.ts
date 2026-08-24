@@ -10,6 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RoadmapRouteImport } from './routes/roadmap'
+import { Route as ScanRouteImport } from './routes/scan'
+import { Route as TrashRouteImport } from './routes/trash'
 import { Route as GroupsIndexRouteImport } from './routes/groups.index'
 import { Route as GroupsGroupIdRouteImport } from './routes/groups.$groupId'
 import { Route as LibraryIndexRouteImport } from './routes/library.index'
@@ -18,6 +21,21 @@ import { Route as LibraryFolderIdRouteImport } from './routes/library.$folderId'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoadmapRoute = RoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScanRoute = ScanRouteImport.update({
+  id: '/scan',
+  path: '/scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrashRoute = TrashRouteImport.update({
+  id: '/trash',
+  path: '/trash',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GroupsIndexRoute = GroupsIndexRouteImport.update({
@@ -43,6 +61,9 @@ const LibraryFolderIdRoute = LibraryFolderIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/roadmap': typeof RoadmapRoute
+  '/scan': typeof ScanRoute
+  '/trash': typeof TrashRoute
   '/groups/$groupId': typeof GroupsGroupIdRoute
   '/library/$folderId': typeof LibraryFolderIdRoute
   '/groups/': typeof GroupsIndexRoute
@@ -50,6 +71,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/roadmap': typeof RoadmapRoute
+  '/scan': typeof ScanRoute
+  '/trash': typeof TrashRoute
   '/groups/$groupId': typeof GroupsGroupIdRoute
   '/library/$folderId': typeof LibraryFolderIdRoute
   '/groups': typeof GroupsIndexRoute
@@ -58,6 +82,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/roadmap': typeof RoadmapRoute
+  '/scan': typeof ScanRoute
+  '/trash': typeof TrashRoute
   '/groups/$groupId': typeof GroupsGroupIdRoute
   '/library/$folderId': typeof LibraryFolderIdRoute
   '/groups/': typeof GroupsIndexRoute
@@ -66,12 +93,30 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/groups/$groupId' | '/library/$folderId' | '/groups/' | '/library/'
+    | '/'
+    | '/roadmap'
+    | '/scan'
+    | '/trash'
+    | '/groups/$groupId'
+    | '/library/$folderId'
+    | '/groups/'
+    | '/library/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/groups/$groupId' | '/library/$folderId' | '/groups' | '/library'
+  to:
+    | '/'
+    | '/roadmap'
+    | '/scan'
+    | '/trash'
+    | '/groups/$groupId'
+    | '/library/$folderId'
+    | '/groups'
+    | '/library'
   id:
     | '__root__'
     | '/'
+    | '/roadmap'
+    | '/scan'
+    | '/trash'
     | '/groups/$groupId'
     | '/library/$folderId'
     | '/groups/'
@@ -80,6 +125,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RoadmapRoute: typeof RoadmapRoute
+  ScanRoute: typeof ScanRoute
+  TrashRoute: typeof TrashRoute
   GroupsGroupIdRoute: typeof GroupsGroupIdRoute
   LibraryFolderIdRoute: typeof LibraryFolderIdRoute
   GroupsIndexRoute: typeof GroupsIndexRoute
@@ -93,6 +141,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/roadmap': {
+      id: '/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scan': {
+      id: '/scan'
+      path: '/scan'
+      fullPath: '/scan'
+      preLoaderRoute: typeof ScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trash': {
+      id: '/trash'
+      path: '/trash'
+      fullPath: '/trash'
+      preLoaderRoute: typeof TrashRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/groups/': {
@@ -128,6 +197,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RoadmapRoute: RoadmapRoute,
+  ScanRoute: ScanRoute,
+  TrashRoute: TrashRoute,
   GroupsGroupIdRoute: GroupsGroupIdRoute,
   LibraryFolderIdRoute: LibraryFolderIdRoute,
   GroupsIndexRoute: GroupsIndexRoute,
