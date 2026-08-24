@@ -159,3 +159,107 @@ export const trashItems = {
     { id: "t5", name: "meticulous", emoji: "🔤", description: "Đã xóa 3 ngày trước · thuộc bộ Academic Verbs" },
   ],
 };
+
+/* ---------- Luyện tập / Đề thi / Thi thử ---------- */
+
+export type PracticeSkill = {
+  id: string;
+  name: string;
+  emoji: string;
+  description: string;
+  sets: number;
+  minutes: number;
+  progress: number;
+};
+
+export const practiceSkills: PracticeSkill[] = [
+  {
+    id: "listening",
+    name: "Listening",
+    emoji: "🎧",
+    description: "Nghe hội thoại, ghi chú từ khóa và trả lời câu hỏi.",
+    sets: 24,
+    minutes: 12,
+    progress: 62,
+  },
+  {
+    id: "speaking",
+    name: "Speaking",
+    emoji: "🎙️",
+    description: "Luyện phát âm và trả lời theo chủ đề, có nhận xét AI.",
+    sets: 18,
+    minutes: 10,
+    progress: 41,
+  },
+  {
+    id: "reading",
+    name: "Reading",
+    emoji: "📖",
+    description: "Đọc hiểu đoạn văn, ghép câu và điền từ vào chỗ trống.",
+    sets: 32,
+    minutes: 15,
+    progress: 78,
+  },
+  {
+    id: "writing",
+    name: "Writing",
+    emoji: "✍️",
+    description: "Viết email, mô tả biểu đồ và luyện câu theo mẫu.",
+    sets: 16,
+    minutes: 20,
+    progress: 35,
+  },
+];
+
+export const practiceVocabModes = [
+  { id: "flashcard", emoji: "🗂️", name: "Thẻ ghi nhớ", description: "Lật thẻ để ôn nhanh 20 từ." },
+  { id: "quiz", emoji: "✅", name: "Trắc nghiệm", description: "Chọn nghĩa đúng trong 4 đáp án." },
+  { id: "typing", emoji: "⌨️", name: "Điền từ", description: "Nghe và viết lại chính tả từ vựng." },
+  { id: "match", emoji: "🧩", name: "Ghép cặp", description: "Nối từ với nghĩa trong thời gian giới hạn." },
+];
+
+export type ExamSet = {
+  id: string;
+  name: string;
+  exam: "Aptis" | "VSTEP" | "IELTS" | "TOEIC";
+  level: string;
+  minutes: number;
+  questions: number;
+  parts: number;
+  attempts: number;
+  isNew?: boolean;
+};
+
+export const examSets: ExamSet[] = [
+  { id: "aptis-01", name: "Aptis General Test 01", exam: "Aptis", level: "B1 - B2", minutes: 120, questions: 90, parts: 4, attempts: 1284, isNew: true },
+  { id: "aptis-02", name: "Aptis General Test 02", exam: "Aptis", level: "B2", minutes: 120, questions: 90, parts: 4, attempts: 964 },
+  { id: "vstep-01", name: "VSTEP B2 Đề số 1", exam: "VSTEP", level: "B2", minutes: 150, questions: 100, parts: 4, attempts: 742 },
+  { id: "ielts-rd-03", name: "IELTS Reading Practice 03", exam: "IELTS", level: "6.0 - 7.0", minutes: 60, questions: 40, parts: 3, attempts: 1530 },
+  { id: "toeic-lr-05", name: "TOEIC L&R Test 05", exam: "TOEIC", level: "600+", minutes: 120, questions: 200, parts: 7, attempts: 2108 },
+  { id: "aptis-vocab", name: "Aptis Grammar & Vocabulary", exam: "Aptis", level: "A2 - B2", minutes: 25, questions: 50, parts: 2, attempts: 655, isNew: true },
+];
+
+export const examFilters = ["Tất cả", "Aptis", "VSTEP", "IELTS", "TOEIC"];
+
+export type MockResult = {
+  id: string;
+  name: string;
+  date: string;
+  score: string;
+  band: string;
+  correct: number;
+  total: number;
+};
+
+export const mockResults: MockResult[] = [
+  { id: "r1", name: "Aptis General Test 01", date: "22/08/2026", score: "168/200", band: "B2", correct: 76, total: 90 },
+  { id: "r2", name: "VSTEP B2 Đề số 1", date: "15/08/2026", score: "7.5/10", band: "B2", correct: 78, total: 100 },
+  { id: "r3", name: "TOEIC L&R Test 05", date: "06/08/2026", score: "720/990", band: "B1", correct: 148, total: 200 },
+];
+
+export const mockSkillScores = [
+  { skill: "Listening", value: 82 },
+  { skill: "Reading", value: 88 },
+  { skill: "Writing", value: 64 },
+  { skill: "Speaking", value: 58 },
+];

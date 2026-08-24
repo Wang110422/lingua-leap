@@ -11,16 +11,23 @@ import {
   HelpCircle,
   Settings,
   LogOut,
+  Dumbbell,
+  FileText,
+  Timer,
 } from "lucide-react";
 
 const items = [
   { to: "/", label: "Trang chủ", icon: Home },
+  { to: "/practice", label: "Luyện tập", icon: Dumbbell },
+  { to: "/exams", label: "Đề thi", icon: FileText },
+  { to: "/mock-test", label: "Thi thử", icon: Timer },
   { to: "/groups", label: "Nhóm học", icon: Users },
   { to: "/library", label: "Thư viện của bạn", icon: Library },
   { to: "/roadmap", label: "Lộ trình học", icon: RouteIcon },
   { to: "/scan", label: "Quét tài liệu", icon: ScanLine },
   { to: "/trash", label: "Đã xóa", icon: Trash2 },
 ];
+
 
 const secondaryItems = [
   { label: "Trợ giúp", icon: HelpCircle },
