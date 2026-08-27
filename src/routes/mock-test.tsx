@@ -71,7 +71,7 @@ function MockTestPage() {
               </article>
             ))}
           </div>
-          <Link to="/exams" className="inline-block">
+          <Link to="/exam-practice" className="inline-block">
             <BtnOutline className="h-10">Xem tất cả đề thi</BtnOutline>
           </Link>
         </section>
