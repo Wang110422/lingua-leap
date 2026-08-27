@@ -8,7 +8,6 @@ import {
   ScanLine,
   Trash2,
   BookOpenText,
-  Dumbbell,
   FileText,
   Timer,
   User,
