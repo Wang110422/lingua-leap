@@ -10,9 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ExamsRouteImport } from './routes/exams'
 import { Route as MockTestRouteImport } from './routes/mock-test'
-import { Route as PracticeRouteImport } from './routes/practice'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ScanRouteImport } from './routes/scan'
 import { Route as TrashRouteImport } from './routes/trash'
@@ -26,19 +24,9 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ExamsRoute = ExamsRouteImport.update({
-  id: '/exams',
-  path: '/exams',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const MockTestRoute = MockTestRouteImport.update({
   id: '/mock-test',
   path: '/mock-test',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PracticeRoute = PracticeRouteImport.update({
-  id: '/practice',
-  path: '/practice',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoadmapRoute = RoadmapRouteImport.update({
@@ -79,9 +67,7 @@ const LibraryFolderIdRoute = LibraryFolderIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/exams': typeof ExamsRoute
   '/mock-test': typeof MockTestRoute
-  '/practice': typeof PracticeRoute
   '/roadmap': typeof RoadmapRoute
   '/scan': typeof ScanRoute
   '/trash': typeof TrashRoute
@@ -92,9 +78,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/exams': typeof ExamsRoute
   '/mock-test': typeof MockTestRoute
-  '/practice': typeof PracticeRoute
   '/roadmap': typeof RoadmapRoute
   '/scan': typeof ScanRoute
   '/trash': typeof TrashRoute
@@ -106,9 +90,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/exams': typeof ExamsRoute
   '/mock-test': typeof MockTestRoute
-  '/practice': typeof PracticeRoute
   '/roadmap': typeof RoadmapRoute
   '/scan': typeof ScanRoute
   '/trash': typeof TrashRoute
@@ -121,9 +103,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/exams'
     | '/mock-test'
-    | '/practice'
     | '/roadmap'
     | '/scan'
     | '/trash'
@@ -134,9 +114,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/exams'
     | '/mock-test'
-    | '/practice'
     | '/roadmap'
     | '/scan'
     | '/trash'
@@ -147,9 +125,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/exams'
     | '/mock-test'
-    | '/practice'
     | '/roadmap'
     | '/scan'
     | '/trash'
@@ -161,9 +137,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ExamsRoute: typeof ExamsRoute
   MockTestRoute: typeof MockTestRoute
-  PracticeRoute: typeof PracticeRoute
   RoadmapRoute: typeof RoadmapRoute
   ScanRoute: typeof ScanRoute
   TrashRoute: typeof TrashRoute
@@ -182,25 +156,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/exams': {
-      id: '/exams'
-      path: '/exams'
-      fullPath: '/exams'
-      preLoaderRoute: typeof ExamsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/mock-test': {
       id: '/mock-test'
       path: '/mock-test'
       fullPath: '/mock-test'
       preLoaderRoute: typeof MockTestRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/practice': {
-      id: '/practice'
-      path: '/practice'
-      fullPath: '/practice'
-      preLoaderRoute: typeof PracticeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/roadmap': {
@@ -257,9 +217,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ExamsRoute: ExamsRoute,
   MockTestRoute: MockTestRoute,
-  PracticeRoute: PracticeRoute,
   RoadmapRoute: RoadmapRoute,
   ScanRoute: ScanRoute,
   TrashRoute: TrashRoute,
