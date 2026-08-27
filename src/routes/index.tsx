@@ -56,7 +56,7 @@ function Home() {
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
-              to="/exams"
+              to="/exam-practice"
               className="inline-flex h-12 items-center gap-2 rounded-2xl bg-primary px-6 text-sm font-bold text-primary-foreground shadow-pop transition hover:opacity-90"
             >
               Vào bộ đề <ArrowRight className="h-4 w-4" />

@@ -8,7 +8,6 @@ import {
   ScanLine,
   Trash2,
   BookOpenText,
-  Dumbbell,
   FileText,
   Timer,
   User,
@@ -22,8 +21,8 @@ import {
 
 const items = [
   { to: "/", label: "Trang chủ", icon: Home },
-  { to: "/practice", label: "Luyện tập", icon: Dumbbell },
-  { to: "/exams", label: "Đề thi", icon: FileText },
+  { to: "/lessons", label: "Bài học", icon: BookOpenText },
+  { to: "/exam-practice", label: "Luyện đề", icon: FileText },
   { to: "/mock-test", label: "Thi thử", icon: Timer },
   { to: "/groups", label: "Nhóm học", icon: Users },
   { to: "/library", label: "Thư viện của bạn", icon: Library },
