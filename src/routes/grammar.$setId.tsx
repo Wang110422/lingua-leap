@@ -5,6 +5,7 @@ import {
   BookOpenText,
   CheckCircle2,
   ChevronRight,
+  FileCheck2,
   Lightbulb,
   ListChecks,
   Quote,
@@ -84,6 +85,13 @@ function GrammarDetail() {
           </div>
           <p className="mt-1 text-sm text-muted-foreground">{course.overview}</p>
         </div>
+        <Link
+          to="/grammar/$setId/test"
+          params={{ setId: set.id }}
+          className="inline-flex h-11 items-center gap-2 rounded-full bg-primary px-5 text-sm font-bold text-primary-foreground transition hover:opacity-90"
+        >
+          <FileCheck2 className="h-4 w-4" /> Kiểm tra
+        </Link>
         <div className="w-full max-w-xs rounded-2xl border border-border bg-card p-4">
           <div className="flex items-center justify-between text-sm font-semibold">
             <span>Tiến độ chủ điểm</span>
