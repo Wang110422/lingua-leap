@@ -16,6 +16,7 @@ import { Route as MockTestRouteImport } from './routes/mock-test'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ScanRouteImport } from './routes/scan'
 import { Route as TrashRouteImport } from './routes/trash'
+import { Route as GrammarSetIdRouteImport } from './routes/grammar.$setId'
 import { Route as GroupsIndexRouteImport } from './routes/groups.index'
 import { Route as GroupsGroupIdRouteImport } from './routes/groups.$groupId'
 import { Route as LibraryIndexRouteImport } from './routes/library.index'
@@ -57,6 +58,11 @@ const TrashRoute = TrashRouteImport.update({
   path: '/trash',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GrammarSetIdRoute = GrammarSetIdRouteImport.update({
+  id: '/grammar/$setId',
+  path: '/grammar/$setId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GroupsIndexRoute = GroupsIndexRouteImport.update({
   id: '/groups/',
   path: '/groups/',
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/roadmap': typeof RoadmapRoute
   '/scan': typeof ScanRoute
   '/trash': typeof TrashRoute
+  '/grammar/$setId': typeof GrammarSetIdRoute
   '/groups/$groupId': typeof GroupsGroupIdRoute
   '/library/$folderId': typeof LibraryFolderIdRoute
   '/sets/$setId': typeof SetsSetIdRoute
@@ -105,6 +112,7 @@ export interface FileRoutesByTo {
   '/roadmap': typeof RoadmapRoute
   '/scan': typeof ScanRoute
   '/trash': typeof TrashRoute
+  '/grammar/$setId': typeof GrammarSetIdRoute
   '/groups/$groupId': typeof GroupsGroupIdRoute
   '/library/$folderId': typeof LibraryFolderIdRoute
   '/sets/$setId': typeof SetsSetIdRoute
@@ -120,6 +128,7 @@ export interface FileRoutesById {
   '/roadmap': typeof RoadmapRoute
   '/scan': typeof ScanRoute
   '/trash': typeof TrashRoute
+  '/grammar/$setId': typeof GrammarSetIdRoute
   '/groups/$groupId': typeof GroupsGroupIdRoute
   '/library/$folderId': typeof LibraryFolderIdRoute
   '/sets/$setId': typeof SetsSetIdRoute
@@ -136,6 +145,7 @@ export interface FileRouteTypes {
     | '/roadmap'
     | '/scan'
     | '/trash'
+    | '/grammar/$setId'
     | '/groups/$groupId'
     | '/library/$folderId'
     | '/sets/$setId'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/roadmap'
     | '/scan'
     | '/trash'
+    | '/grammar/$setId'
     | '/groups/$groupId'
     | '/library/$folderId'
     | '/sets/$setId'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/roadmap'
     | '/scan'
     | '/trash'
+    | '/grammar/$setId'
     | '/groups/$groupId'
     | '/library/$folderId'
     | '/sets/$setId'
@@ -179,6 +191,7 @@ export interface RootRouteChildren {
   RoadmapRoute: typeof RoadmapRoute
   ScanRoute: typeof ScanRoute
   TrashRoute: typeof TrashRoute
+  GrammarSetIdRoute: typeof GrammarSetIdRoute
   GroupsGroupIdRoute: typeof GroupsGroupIdRoute
   LibraryFolderIdRoute: typeof LibraryFolderIdRoute
   SetsSetIdRoute: typeof SetsSetIdRoute
@@ -237,6 +250,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrashRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/grammar/$setId': {
+      id: '/grammar/$setId'
+      path: '/grammar/$setId'
+      fullPath: '/grammar/$setId'
+      preLoaderRoute: typeof GrammarSetIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/groups/': {
       id: '/groups/'
       path: '/groups'
@@ -283,6 +303,7 @@ const rootRouteChildren: RootRouteChildren = {
   RoadmapRoute: RoadmapRoute,
   ScanRoute: ScanRoute,
   TrashRoute: TrashRoute,
+  GrammarSetIdRoute: GrammarSetIdRoute,
   GroupsGroupIdRoute: GroupsGroupIdRoute,
   LibraryFolderIdRoute: LibraryFolderIdRoute,
   SetsSetIdRoute: SetsSetIdRoute,
