@@ -20,6 +20,7 @@ import { Route as GroupsIndexRouteImport } from './routes/groups.index'
 import { Route as GroupsGroupIdRouteImport } from './routes/groups.$groupId'
 import { Route as LibraryIndexRouteImport } from './routes/library.index'
 import { Route as LibraryFolderIdRouteImport } from './routes/library.$folderId'
+import { Route as SetsSetIdRouteImport } from './routes/sets.$setId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,6 +77,11 @@ const LibraryFolderIdRoute = LibraryFolderIdRouteImport.update({
   path: '/library/$folderId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SetsSetIdRoute = SetsSetIdRouteImport.update({
+  id: '/sets/$setId',
+  path: '/sets/$setId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/trash': typeof TrashRoute
   '/groups/$groupId': typeof GroupsGroupIdRoute
   '/library/$folderId': typeof LibraryFolderIdRoute
+  '/sets/$setId': typeof SetsSetIdRoute
   '/groups/': typeof GroupsIndexRoute
   '/library/': typeof LibraryIndexRoute
 }
@@ -100,6 +107,7 @@ export interface FileRoutesByTo {
   '/trash': typeof TrashRoute
   '/groups/$groupId': typeof GroupsGroupIdRoute
   '/library/$folderId': typeof LibraryFolderIdRoute
+  '/sets/$setId': typeof SetsSetIdRoute
   '/groups': typeof GroupsIndexRoute
   '/library': typeof LibraryIndexRoute
 }
@@ -114,6 +122,7 @@ export interface FileRoutesById {
   '/trash': typeof TrashRoute
   '/groups/$groupId': typeof GroupsGroupIdRoute
   '/library/$folderId': typeof LibraryFolderIdRoute
+  '/sets/$setId': typeof SetsSetIdRoute
   '/groups/': typeof GroupsIndexRoute
   '/library/': typeof LibraryIndexRoute
 }
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
     | '/trash'
     | '/groups/$groupId'
     | '/library/$folderId'
+    | '/sets/$setId'
     | '/groups/'
     | '/library/'
   fileRoutesByTo: FileRoutesByTo
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/trash'
     | '/groups/$groupId'
     | '/library/$folderId'
+    | '/sets/$setId'
     | '/groups'
     | '/library'
   id:
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/trash'
     | '/groups/$groupId'
     | '/library/$folderId'
+    | '/sets/$setId'
     | '/groups/'
     | '/library/'
   fileRoutesById: FileRoutesById
@@ -169,6 +181,7 @@ export interface RootRouteChildren {
   TrashRoute: typeof TrashRoute
   GroupsGroupIdRoute: typeof GroupsGroupIdRoute
   LibraryFolderIdRoute: typeof LibraryFolderIdRoute
+  SetsSetIdRoute: typeof SetsSetIdRoute
   GroupsIndexRoute: typeof GroupsIndexRoute
   LibraryIndexRoute: typeof LibraryIndexRoute
 }
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LibraryFolderIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sets/$setId': {
+      id: '/sets/$setId'
+      path: '/sets/$setId'
+      fullPath: '/sets/$setId'
+      preLoaderRoute: typeof SetsSetIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -265,6 +285,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrashRoute: TrashRoute,
   GroupsGroupIdRoute: GroupsGroupIdRoute,
   LibraryFolderIdRoute: LibraryFolderIdRoute,
+  SetsSetIdRoute: SetsSetIdRoute,
   GroupsIndexRoute: GroupsIndexRoute,
   LibraryIndexRoute: LibraryIndexRoute,
 }

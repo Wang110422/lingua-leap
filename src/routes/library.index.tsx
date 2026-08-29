@@ -120,7 +120,12 @@ function LibraryPage() {
       {tab === "sets" ? (
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {cardSets.map((s) => (
-            <article key={s.id} className="surface-card p-5">
+            <Link
+              key={s.id}
+              to="/sets/$setId"
+              params={{ setId: s.id }}
+              className="surface-card block p-5 transition hover:border-primary/40"
+            >
               <div className="flex items-start justify-between gap-3">
                 <Pill tone={s.folder ? "primary" : "muted"}>{s.folder ?? "Bộ từ vựng độc lập"}</Pill>
                 <span className="text-xs text-muted-foreground">{s.terms} thuật ngữ</span>
@@ -135,7 +140,7 @@ function LibraryPage() {
                   <BookOpen className="h-3.5 w-3.5" /> Bắt đầu học →
                 </span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       ) : null}
