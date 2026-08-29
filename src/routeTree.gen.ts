@@ -22,6 +22,7 @@ import { Route as GroupsGroupIdRouteImport } from './routes/groups.$groupId'
 import { Route as LibraryIndexRouteImport } from './routes/library.index'
 import { Route as LibraryFolderIdRouteImport } from './routes/library.$folderId'
 import { Route as SetsSetIdRouteImport } from './routes/sets.$setId'
+import { Route as GrammarSetIdTestRouteImport } from './routes/grammar_.$setId.test'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -88,6 +89,11 @@ const SetsSetIdRoute = SetsSetIdRouteImport.update({
   path: '/sets/$setId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GrammarSetIdTestRoute = GrammarSetIdTestRouteImport.update({
+  id: '/grammar_/$setId/test',
+  path: '/grammar/$setId/test',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/sets/$setId': typeof SetsSetIdRoute
   '/groups/': typeof GroupsIndexRoute
   '/library/': typeof LibraryIndexRoute
+  '/grammar/$setId/test': typeof GrammarSetIdTestRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/sets/$setId': typeof SetsSetIdRoute
   '/groups': typeof GroupsIndexRoute
   '/library': typeof LibraryIndexRoute
+  '/grammar/$setId/test': typeof GrammarSetIdTestRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/sets/$setId': typeof SetsSetIdRoute
   '/groups/': typeof GroupsIndexRoute
   '/library/': typeof LibraryIndexRoute
+  '/grammar_/$setId/test': typeof GrammarSetIdTestRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/sets/$setId'
     | '/groups/'
     | '/library/'
+    | '/grammar/$setId/test'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/sets/$setId'
     | '/groups'
     | '/library'
+    | '/grammar/$setId/test'
   id:
     | '__root__'
     | '/'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/sets/$setId'
     | '/groups/'
     | '/library/'
+    | '/grammar_/$setId/test'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   SetsSetIdRoute: typeof SetsSetIdRoute
   GroupsIndexRoute: typeof GroupsIndexRoute
   LibraryIndexRoute: typeof LibraryIndexRoute
+  GrammarSetIdTestRoute: typeof GrammarSetIdTestRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -292,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SetsSetIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/grammar_/$setId/test': {
+      id: '/grammar_/$setId/test'
+      path: '/grammar/$setId/test'
+      fullPath: '/grammar/$setId/test'
+      preLoaderRoute: typeof GrammarSetIdTestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -309,6 +329,7 @@ const rootRouteChildren: RootRouteChildren = {
   SetsSetIdRoute: SetsSetIdRoute,
   GroupsIndexRoute: GroupsIndexRoute,
   LibraryIndexRoute: LibraryIndexRoute,
+  GrammarSetIdTestRoute: GrammarSetIdTestRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
