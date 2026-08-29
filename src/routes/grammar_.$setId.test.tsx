@@ -24,7 +24,7 @@ export const Route = createFileRoute("/grammar_/$setId/test")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: GrammarTest;
+  component: GrammarTest,
 });
 
 function GrammarTest() {
