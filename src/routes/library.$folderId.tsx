@@ -74,9 +74,13 @@ function FolderDetail() {
             <h3 className="mt-4 font-bold">{s.name}</h3>
             <p className="mt-1 text-xs text-muted-foreground">{s.terms} thuật ngữ</p>
             <div className="mt-4 border-t border-border pt-3">
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary">
+              <Link
+                to="/sets/$setId"
+                params={{ setId: s.id }}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline"
+              >
                 <BookOpen className="h-3.5 w-3.5" /> Bắt đầu học từ vựng
-              </span>
+              </Link>
             </div>
           </article>
         ))}
