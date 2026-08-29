@@ -93,9 +93,15 @@ function LessonsPage() {
                   </Pill>
                   <Pill tone="info">{s.level}</Pill>
                 </div>
-                <BtnPrimary className="mt-auto h-10">
-                  <Play className="h-4 w-4" /> Học bộ này
-                </BtnPrimary>
+                <Link
+                  to={tab === "grammar" ? "/grammar/$setId" : "/sets/$setId"}
+                  params={{ setId: s.id }}
+                  className="mt-auto"
+                >
+                  <BtnPrimary className="h-10 w-full">
+                    <Play className="h-4 w-4" /> Học bộ này
+                  </BtnPrimary>
+                </Link>
               </article>
             ))}
           </div>
