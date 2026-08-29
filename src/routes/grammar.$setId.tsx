@@ -5,6 +5,7 @@ import {
   BookOpenText,
   CheckCircle2,
   ChevronRight,
+  FileCheck2,
   Lightbulb,
   ListChecks,
   Quote,
