@@ -87,6 +87,7 @@ export function BtnOutline({
 export function TabPill({
   children,
   active = false,
+  className = "",
   ...rest
 }: { children: ReactNode; active?: boolean } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
@@ -97,7 +98,7 @@ export function TabPill({
         active
           ? "bg-primary text-primary-foreground shadow-pop"
           : "border border-border bg-card text-muted-foreground hover:text-foreground"
-      }`}
+      } ${className}`}
     >
       {children}
     </button>
