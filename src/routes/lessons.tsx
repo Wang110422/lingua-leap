@@ -49,12 +49,18 @@ export const Route = createFileRoute("/lessons")({
   component: LessonsPage,
 });
 
+function setDifficulty(level: string): LevelFilter {
+  if (level.includes("A2") || level === "B1") return "Cơ bản";
+  if (level.includes("C1")) return "Nâng cao";
+  return "Trung bình";
+}
+
 function LessonsPage() {
   const [tab, setTab] = useState<TabKey>("listening");
   const [levelFilter, setLevelFilter] = useState<LevelFilter>("all");
   const isSet = tab === "vocab" || tab === "grammar";
   const sets = (tab === "grammar" ? grammarStudySets : vocabStudySets).filter(
-    (s) => levelFilter === "all" || s.level.includes(levelFilter),
+    (s) => levelFilter === "all" || setDifficulty(s.level) === levelFilter,
   );
   const groups = isSet
     ? []
