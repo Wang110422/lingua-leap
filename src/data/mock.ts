@@ -336,6 +336,7 @@ export const lessonGroups: Record<SkillKey, LessonGroup[]> = {
         "Nói đủ thời gian, tránh trả lời một câu rồi im.",
       ],
       cta: "Học Part 1",
+      level: "Cơ bản",
     },
     {
       id: "s-part2",
@@ -347,6 +348,7 @@ export const lessonGroups: Record<SkillKey, LessonGroup[]> = {
         "Dành 15 giây cuối để liên hệ bản thân.",
       ],
       cta: "Học Part 2",
+      level: "Trung bình",
     },
     {
       id: "s-part4",
@@ -358,6 +360,7 @@ export const lessonGroups: Record<SkillKey, LessonGroup[]> = {
         "Kết lại bằng một câu tóm ý.",
       ],
       cta: "Học Part 4",
+      level: "Nâng cao",
     },
   ],
   reading: [
