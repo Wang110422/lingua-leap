@@ -374,6 +374,7 @@ export const lessonGroups: Record<SkillKey, LessonGroup[]> = {
         "Dùng đại từ và từ nối để nối chuỗi câu.",
       ],
       cta: "Học Part 1-2",
+      level: "Cơ bản",
     },
     {
       id: "r-part3",
@@ -385,6 +386,7 @@ export const lessonGroups: Record<SkillKey, LessonGroup[]> = {
         "Cẩn thận các bẫy paraphrase.",
       ],
       cta: "Học Part 3",
+      level: "Trung bình",
     },
     {
       id: "r-part4",
@@ -396,6 +398,7 @@ export const lessonGroups: Record<SkillKey, LessonGroup[]> = {
         "Không dịch từng từ, đọc theo cụm.",
       ],
       cta: "Học Part 4",
+      level: "Nâng cao",
     },
   ],
   writing: [
@@ -409,6 +412,7 @@ export const lessonGroups: Record<SkillKey, LessonGroup[]> = {
         "Kiểm tra lại chính tả và số.",
       ],
       cta: "Học Part 1",
+      level: "Cơ bản",
     },
     {
       id: "w-part3",
@@ -420,6 +424,7 @@ export const lessonGroups: Record<SkillKey, LessonGroup[]> = {
         "Giữ đủ số từ cho từng câu.",
       ],
       cta: "Học Part 3",
+      level: "Trung bình",
     },
     {
       id: "w-part4",
@@ -431,6 +436,7 @@ export const lessonGroups: Record<SkillKey, LessonGroup[]> = {
         "Dành 3 phút cuối để soát lỗi ngữ pháp.",
       ],
       cta: "Học Part 4",
+      level: "Nâng cao",
     },
   ],
 };
