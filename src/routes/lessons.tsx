@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { BookOpenText, CheckCircle2, Layers, Play, Sparkles } from "lucide-react";
+import { BookOpenText, CheckCircle2, Layers, Play, SlidersHorizontal, Sparkles } from "lucide-react";
 
 import { PageHeader, SectionTitle } from "@/components/app/PageHeader";
 import { BtnOutline, BtnPrimary, EmojiTile, Pill, TabPill } from "@/components/app/ui-bits";
@@ -13,11 +13,19 @@ import {
 } from "@/data/mock";
 
 type TabKey = SkillKey | "vocab" | "grammar";
+type LevelFilter = "all" | "Cơ bản" | "Trung bình" | "Nâng cao";
 
 const tabs: { id: TabKey; name: string; emoji: string }[] = [
   ...skillTabs.map((s) => ({ id: s.id as TabKey, name: s.name, emoji: s.emoji })),
   { id: "vocab", name: "Từ vựng", emoji: "📚" },
   { id: "grammar", name: "Ngữ pháp", emoji: "🔤" },
+];
+
+const levelFilters: { id: LevelFilter; label: string }[] = [
+  { id: "all", label: "Tất cả" },
+  { id: "Cơ bản", label: "Cơ bản" },
+  { id: "Trung bình", label: "Trung bình" },
+  { id: "Nâng cao", label: "Nâng cao" },
 ];
 
 export const Route = createFileRoute("/lessons")({
@@ -43,9 +51,14 @@ export const Route = createFileRoute("/lessons")({
 
 function LessonsPage() {
   const [tab, setTab] = useState<TabKey>("listening");
+  const [levelFilter, setLevelFilter] = useState<LevelFilter>("all");
   const isSet = tab === "vocab" || tab === "grammar";
-  const sets = tab === "grammar" ? grammarStudySets : vocabStudySets;
-  const groups = isSet ? [] : lessonGroups[tab as SkillKey];
+  const sets = (tab === "grammar" ? grammarStudySets : vocabStudySets).filter(
+    (s) => levelFilter === "all" || s.level.includes(levelFilter),
+  );
+  const groups = isSet
+    ? []
+    : lessonGroups[tab as SkillKey].filter((g) => levelFilter === "all" || g.level === levelFilter);
 
   return (
     <div className="space-y-6">
@@ -68,6 +81,25 @@ function LessonsPage() {
             <span>{t.emoji}</span> {t.name}
           </TabPill>
         ))}
+      </div>
+
+      <div className="surface-card space-y-3 p-5">
+        <div className="flex items-center gap-2 text-sm font-bold text-foreground">
+          <SlidersHorizontal className="h-4 w-4 text-primary" />
+          Bộ lọc bài học
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {levelFilters.map((f) => (
+            <TabPill
+              key={f.id}
+              active={levelFilter === f.id}
+              onClick={() => setLevelFilter(f.id)}
+              className="h-9 px-3 text-xs"
+            >
+              {f.label}
+            </TabPill>
+          ))}
+        </div>
       </div>
 
       {isSet ? (
@@ -116,10 +148,17 @@ function LessonsPage() {
                 className="overflow-hidden rounded-3xl border border-border bg-muted/40"
               >
                 <div className="bg-primary px-6 py-5 text-primary-foreground">
-                  <h3 className="font-display text-lg font-bold">{g.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-primary-foreground/85">
-                    {g.summary}
-                  </p>
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-display text-lg font-bold">{g.title}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-primary-foreground/85">
+                        {g.summary}
+                      </p>
+                    </div>
+                    <Pill tone={g.level === "Cơ bản" ? "success" : g.level === "Nâng cao" ? "danger" : "warning"}>
+                      {g.level}
+                    </Pill>
+                  </div>
                 </div>
                 <div className="space-y-3 p-5">
                   {g.tips.map((tip) => (
