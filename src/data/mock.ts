@@ -281,6 +281,7 @@ export type LessonGroup = {
   summary: string;
   tips: string[];
   cta: string;
+  level: "Cơ bản" | "Trung bình" | "Nâng cao";
 };
 
 export const lessonGroups: Record<SkillKey, LessonGroup[]> = {
@@ -296,6 +297,7 @@ export const lessonGroups: Record<SkillKey, LessonGroup[]> = {
         "Nếu lỡ một câu, bỏ qua ngay để giữ nhịp cho câu tiếp theo.",
       ],
       cta: "Học câu 1-13",
+      level: "Cơ bản",
     },
     {
       id: "l-14-17",
