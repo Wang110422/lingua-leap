@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, Clock, FileCheck2, FileText, Play, Search } from "lucide-react";
+import { ArrowRight, Clock, FileCheck2, FileText, Play, Search, SlidersHorizontal } from "lucide-react";
 
 import { PageHeader, SectionTitle } from "@/components/app/PageHeader";
 import { BtnPrimary, Pill, TabPill } from "@/components/app/ui-bits";
@@ -24,14 +24,48 @@ export const Route = createFileRoute("/exam-practice")({
   component: ExamPracticePage,
 });
 
+type TimeFilter = "all" | "short" | "medium" | "long";
+type QuestionFilter = "all" | "few" | "mid" | "many";
+
+const timeFilters: { id: TimeFilter; label: string }[] = [
+  { id: "all", label: "Tất cả" },
+  { id: "short", label: "Dưới 30 phút" },
+  { id: "medium", label: "30-60 phút" },
+  { id: "long", label: "Trên 60 phút" },
+];
+
+const questionFilters: { id: QuestionFilter; label: string }[] = [
+  { id: "all", label: "Tất cả" },
+  { id: "few", label: "Dưới 20 câu" },
+  { id: "mid", label: "20-30 câu" },
+  { id: "many", label: "Trên 30 câu" },
+];
+
+function matchesTimeFilter(minutes: number, filter: TimeFilter) {
+  if (filter === "short") return minutes < 30;
+  if (filter === "medium") return minutes >= 30 && minutes <= 60;
+  if (filter === "long") return minutes > 60;
+  return true;
+}
+
+function matchesQuestionFilter(questions: number, filter: QuestionFilter) {
+  if (filter === "few") return questions < 20;
+  if (filter === "mid") return questions >= 20 && questions <= 30;
+  if (filter === "many") return questions > 30;
+  return true;
+}
+
 function ExamPracticePage() {
   const [skill, setSkill] = useState<SkillKey>("listening");
   const [query, setQuery] = useState("");
+  const [timeFilter, setTimeFilter] = useState<TimeFilter>("all");
+  const [questionFilter, setQuestionFilter] = useState<QuestionFilter>("all");
 
   const active = skillTabs.find((s) => s.id === skill)!;
-  const list = examDrills[skill].filter((e) =>
-    e.name.toLowerCase().includes(query.trim().toLowerCase()),
-  );
+  const list = examDrills[skill].filter((e) => {
+    const matchesQuery = e.name.toLowerCase().includes(query.trim().toLowerCase());
+    return matchesQuery && matchesTimeFilter(e.minutes, timeFilter) && matchesQuestionFilter(e.questions, questionFilter);
+  });
 
   return (
     <div className="space-y-6">
@@ -54,6 +88,45 @@ function ExamPracticePage() {
             <span>{s.emoji}</span> {s.name}
           </TabPill>
         ))}
+      </div>
+
+      <div className="surface-card space-y-4 p-5">
+        <div className="flex items-center gap-2 text-sm font-bold text-foreground">
+          <SlidersHorizontal className="h-4 w-4 text-primary" />
+          Bộ lọc đề
+        </div>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+          <div className="flex-1 space-y-2">
+            <span className="text-xs font-semibold text-muted-foreground">Thời gian làm bài</span>
+            <div className="flex flex-wrap gap-2">
+              {timeFilters.map((f) => (
+                <TabPill
+                  key={f.id}
+                  active={timeFilter === f.id}
+                  onClick={() => setTimeFilter(f.id)}
+                  className="h-9 px-3 text-xs"
+                >
+                  {f.label}
+                </TabPill>
+              ))}
+            </div>
+          </div>
+          <div className="flex-1 space-y-2">
+            <span className="text-xs font-semibold text-muted-foreground">Số câu hỏi</span>
+            <div className="flex flex-wrap gap-2">
+              {questionFilters.map((f) => (
+                <TabPill
+                  key={f.id}
+                  active={questionFilter === f.id}
+                  onClick={() => setQuestionFilter(f.id)}
+                  className="h-9 px-3 text-xs"
+                >
+                  {f.label}
+                </TabPill>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       <label className="surface-card relative flex h-14 items-center p-0">
