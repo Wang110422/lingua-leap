@@ -132,7 +132,7 @@ function RoadmapPage() {
             </div>
 
             <Link
-              to="/roadmap_/$roadmapId"
+              to="/roadmap/$roadmapId"
               params={{ roadmapId: active.id }}
               className="mt-4 flex items-center justify-between rounded-2xl bg-primary px-5 py-4 text-sm font-bold text-primary-foreground transition hover:opacity-90"
             >
