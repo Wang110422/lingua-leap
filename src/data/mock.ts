@@ -806,3 +806,124 @@ export const grammarCourses: Record<string, GrammarCourse> = {
   g5: { overview: "Đại từ quan hệ và cách rút gọn mệnh đề để câu gọn hơn.", topics: relativeTopics },
   g6: { overview: "Giới từ chỉ thời gian, nơi chốn và các cụm cố định hay gặp.", topics: prepositionTopics },
 };
+
+// ===================== Roadmap tree (chặng + task) =====================
+
+export type RoadmapTaskKind = "vocab" | "grammar" | "listening" | "reading" | "speaking" | "writing" | "exam";
+
+export type RoadmapTask = {
+  id: string;
+  index: number;
+  title: string;
+  kind: RoadmapTaskKind;
+  emoji: string;
+  detail: string;
+  status: "done" | "current" | "locked";
+  targetId?: string;
+  score?: number;
+  minScore?: number;
+};
+
+export type RoadmapStage = {
+  id: string;
+  order: number;
+  name: string;
+  goal: string;
+  emoji: string;
+  tasks: RoadmapTask[];
+};
+
+const kindMeta: Record<RoadmapTaskKind, { emoji: string; label: string }> = {
+  vocab: { emoji: "📚", label: "Học 10 từ vựng" },
+  grammar: { emoji: "🔤", label: "Học ngữ pháp" },
+  listening: { emoji: "🎧", label: "Luyện nghe" },
+  reading: { emoji: "📖", label: "Luyện đọc" },
+  speaking: { emoji: "🎙️", label: "Luyện nói" },
+  writing: { emoji: "✍️", label: "Luyện viết" },
+  exam: { emoji: "🏁", label: "Luyện đề" },
+};
+
+const vocabIds = vocabStudySets.map((s) => s.id);
+const grammarIds = grammarStudySets.map((s) => s.id);
+
+function makeTasks(
+  stageId: string,
+  pattern: RoadmapTaskKind[],
+  count: number,
+  startIndex: number,
+  doneCount: number,
+): RoadmapTask[] {
+  return Array.from({ length: count }, (_, i) => {
+    const kind = pattern[i % pattern.length]!;
+    const meta = kindMeta[kind];
+    const status: RoadmapTask["status"] = i < doneCount ? "done" : i === doneCount ? "current" : "locked";
+    const targetId =
+      kind === "vocab"
+        ? vocabIds[i % vocabIds.length]
+        : kind === "grammar"
+          ? grammarIds[i % grammarIds.length]
+          : undefined;
+    return {
+      id: `${stageId}-t${i + 1}`,
+      index: startIndex + i,
+      title: kind === "exam" ? `Đề luyện tập số ${i + 1}` : `${meta.label} · buổi ${i + 1}`,
+      kind,
+      emoji: meta.emoji,
+      detail:
+        kind === "vocab"
+          ? "10 từ mới + ôn nhanh thẻ ghi nhớ"
+          : kind === "grammar"
+            ? "1 chủ điểm ngữ pháp kèm kiểm tra nhanh"
+            : kind === "exam"
+              ? "Hoàn thành đề và đạt điểm tối thiểu để mở chặng tiếp theo"
+              : `${meta.label} theo nhóm câu tương ứng`,
+      status,
+      ...(targetId ? { targetId } : {}),
+      ...(kind === "exam" ? { minScore: 70, ...(i < doneCount ? { score: 74 + i } : {}) } : {}),
+    } satisfies RoadmapTask;
+  });
+}
+
+function buildStages(seed: number): RoadmapStage[] {
+  const s1 = makeTasks("s1", ["vocab", "grammar", "vocab", "reading", "listening"], 32, 1, Math.min(32, seed * 6));
+  const s2 = makeTasks(
+    "s2",
+    ["vocab", "listening", "grammar", "reading", "writing", "speaking"],
+    30,
+    33,
+    Math.max(0, Math.min(30, seed * 6 - 32)),
+  );
+  const s3 = makeTasks("s3", ["exam"], 10, 63, Math.max(0, Math.min(10, seed * 6 - 62)));
+  return [
+    {
+      id: "s1",
+      order: 1,
+      name: "Chặng 1 · Lấy gốc ngữ pháp & từ vựng",
+      goal: "Nền tảng ngữ pháp cơ bản và từ vựng cho Part 1-2, 5.",
+      emoji: "🌱",
+      tasks: s1,
+    },
+    {
+      id: "s2",
+      order: 2,
+      name: "Chặng 2 · Nâng cao 4 kỹ năng",
+      goal: "Ghép từ vựng vào Nghe – Đọc – Viết – Nói theo từng nhóm câu.",
+      emoji: "🚀",
+      tasks: s2,
+    },
+    {
+      id: "s3",
+      order: 3,
+      name: "Chặng 3 · Luyện đề tổng hợp",
+      goal: "10 đề full, đạt tối thiểu 70 điểm mỗi đề để hoàn thành lộ trình.",
+      emoji: "🏆",
+      tasks: s3,
+    },
+  ];
+}
+
+export const roadmapStages: Record<string, RoadmapStage[]> = {
+  "aptis-b2": buildStages(4),
+  business: buildStages(2),
+  "toeic-core": buildStages(6),
+};
