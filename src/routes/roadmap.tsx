@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Route as RouteIcon,
@@ -7,23 +7,20 @@ import {
   CalendarDays,
   Layers,
   Gauge,
-  Pin,
-  BookOpen,
-  Target,
-  ChevronRight,
 } from "lucide-react";
 
 import { PageHeader } from "@/components/app/PageHeader";
-import { Avatar, BtnPrimary, EmojiTile, Progress } from "@/components/app/ui-bits";
-import { cardSets, roadmaps } from "@/data/mock";
+import { RoadmapTree } from "@/components/app/RoadmapTree";
+import { BtnPrimary, EmojiTile, Progress } from "@/components/app/ui-bits";
+import { roadmaps, roadmapStages } from "@/data/mock";
 
 export const Route = createFileRoute("/roadmap")({
   head: () => ({
     meta: [
       { title: "Lộ trình học — LingoMaster" },
-      { name: "description", content: "Theo dõi các mốc bộ thẻ trong lộ trình học từ vựng cá nhân hóa của bạn." },
+      { name: "description", content: "Theo dõi các chặng và task trong lộ trình học từ vựng cá nhân hóa của bạn." },
       { property: "og:title", content: "Lộ trình học — LingoMaster" },
-      { property: "og:description", content: "Lộ trình học từ vựng theo mốc, có tiến độ và mức độ khó." },
+      { property: "og:description", content: "Lộ trình học chia theo chặng, có task từ vựng, ngữ pháp, kỹ năng và luyện đề." },
     ],
   }),
   component: RoadmapPage,
@@ -32,7 +29,11 @@ export const Route = createFileRoute("/roadmap")({
 function RoadmapPage() {
   const [selected, setSelected] = useState(roadmaps[0]!.id);
   const active = roadmaps.find((r) => r.id === selected) ?? roadmaps[0]!;
-  const milestones = cardSets.slice(0, active.total > 5 ? 5 : active.total);
+  const stages = roadmapStages[active.id] ?? [];
+  const allTasks = stages.flatMap((s) => s.tasks);
+  const totalDone = allTasks.filter((t) => t.status === "done").length;
+  const taskPct = allTasks.length ? Math.round((totalDone / allTasks.length) * 100) : 0;
+
 
   return (
     <div className="space-y-6">
