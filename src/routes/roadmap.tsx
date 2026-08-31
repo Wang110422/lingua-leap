@@ -123,51 +123,8 @@ function RoadmapPage() {
             </div>
           </section>
 
-          <section className="surface-card p-6">
-            <div className="flex flex-wrap items-center gap-3">
-              <h3 className="flex items-center gap-2 font-bold">
-                <Pin className="h-[18px] w-[18px] text-primary" /> Các mốc bộ thẻ trong lộ trình
-              </h3>
-              <span className="ml-auto text-xs text-muted-foreground">Nhấp vào mốc để bắt đầu học bộ thẻ</span>
-            </div>
+          <RoadmapTree stages={stages} />
 
-            <Link
-              to="/roadmap/$roadmapId"
-              params={{ roadmapId: active.id }}
-              className="mt-4 flex items-center justify-between rounded-2xl bg-primary px-5 py-4 text-sm font-bold text-primary-foreground transition hover:opacity-90"
-            >
-              <span>Xem cây lộ trình theo chặng &amp; task</span>
-              <ChevronRight className="h-4 w-4" />
-            </Link>
-
-            <ul className="mt-4 space-y-3">
-              {milestones.map((m, i) => (
-                <li key={m.id} className="rounded-2xl border border-border p-4 transition hover:border-primary/50">
-                  <div className="flex items-start gap-3">
-                    <span className="icon-tile font-display text-sm font-bold">#{i + 1}</span>
-                    <div className="min-w-0 flex-1">
-                      <p className="font-bold">{m.name}</p>
-                      <div className="mt-1 flex flex-wrap gap-4 text-xs text-muted-foreground">
-                        <span className="flex items-center gap-1.5">
-                          <BookOpen className="h-3.5 w-3.5" /> {m.terms} thuật ngữ
-                        </span>
-                        <span className="flex items-center gap-1.5">
-                          <Target className="h-3.5 w-3.5" /> Học: {Math.min(m.terms, 20 + i * 5)}/{m.terms} · Kiểm tra:{" "}
-                          {i < active.done ? m.terms : 0}/{m.terms}
-                        </span>
-                      </div>
-                    </div>
-                    <ChevronRight className="h-4 w-4 flex-none text-muted-foreground" />
-                  </div>
-                  <div className="mt-3 flex items-center gap-2 border-t border-border pt-3 text-xs">
-                    <Avatar initial={active.author.charAt(0)} size="sm" />
-                    <span className="text-muted-foreground">Tác giả: {active.author}</span>
-                    <span className="ml-auto font-semibold text-primary">Vào học bộ thẻ →</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </section>
         </div>
       </div>
     </div>
