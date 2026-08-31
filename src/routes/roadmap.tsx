@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Route as RouteIcon,
@@ -130,6 +130,15 @@ function RoadmapPage() {
               </h3>
               <span className="ml-auto text-xs text-muted-foreground">Nhấp vào mốc để bắt đầu học bộ thẻ</span>
             </div>
+
+            <Link
+              to="/roadmap/$roadmapId"
+              params={{ roadmapId: active.id }}
+              className="mt-4 flex items-center justify-between rounded-2xl bg-primary px-5 py-4 text-sm font-bold text-primary-foreground transition hover:opacity-90"
+            >
+              <span>Xem cây lộ trình theo chặng &amp; task</span>
+              <ChevronRight className="h-4 w-4" />
+            </Link>
 
             <ul className="mt-4 space-y-3">
               {milestones.map((m, i) => (

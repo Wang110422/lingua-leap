@@ -21,6 +21,7 @@ import { Route as GroupsIndexRouteImport } from './routes/groups.index'
 import { Route as GroupsGroupIdRouteImport } from './routes/groups.$groupId'
 import { Route as LibraryIndexRouteImport } from './routes/library.index'
 import { Route as LibraryFolderIdRouteImport } from './routes/library.$folderId'
+import { Route as RoadmapRoadmapIdRouteImport } from './routes/roadmap_.$roadmapId'
 import { Route as SetsSetIdRouteImport } from './routes/sets.$setId'
 import { Route as GrammarSetIdTestRouteImport } from './routes/grammar_.$setId.test'
 
@@ -84,6 +85,11 @@ const LibraryFolderIdRoute = LibraryFolderIdRouteImport.update({
   path: '/library/$folderId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RoadmapRoadmapIdRoute = RoadmapRoadmapIdRouteImport.update({
+  id: '/roadmap_/$roadmapId',
+  path: '/roadmap/$roadmapId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SetsSetIdRoute = SetsSetIdRouteImport.update({
   id: '/sets/$setId',
   path: '/sets/$setId',
@@ -106,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/grammar/$setId': typeof GrammarSetIdRoute
   '/groups/$groupId': typeof GroupsGroupIdRoute
   '/library/$folderId': typeof LibraryFolderIdRoute
+  '/roadmap/$roadmapId': typeof RoadmapRoadmapIdRoute
   '/sets/$setId': typeof SetsSetIdRoute
   '/groups/': typeof GroupsIndexRoute
   '/library/': typeof LibraryIndexRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByTo {
   '/grammar/$setId': typeof GrammarSetIdRoute
   '/groups/$groupId': typeof GroupsGroupIdRoute
   '/library/$folderId': typeof LibraryFolderIdRoute
+  '/roadmap/$roadmapId': typeof RoadmapRoadmapIdRoute
   '/sets/$setId': typeof SetsSetIdRoute
   '/groups': typeof GroupsIndexRoute
   '/library': typeof LibraryIndexRoute
@@ -139,6 +147,7 @@ export interface FileRoutesById {
   '/grammar/$setId': typeof GrammarSetIdRoute
   '/groups/$groupId': typeof GroupsGroupIdRoute
   '/library/$folderId': typeof LibraryFolderIdRoute
+  '/roadmap_/$roadmapId': typeof RoadmapRoadmapIdRoute
   '/sets/$setId': typeof SetsSetIdRoute
   '/groups/': typeof GroupsIndexRoute
   '/library/': typeof LibraryIndexRoute
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
     | '/grammar/$setId'
     | '/groups/$groupId'
     | '/library/$folderId'
+    | '/roadmap/$roadmapId'
     | '/sets/$setId'
     | '/groups/'
     | '/library/'
@@ -173,6 +183,7 @@ export interface FileRouteTypes {
     | '/grammar/$setId'
     | '/groups/$groupId'
     | '/library/$folderId'
+    | '/roadmap/$roadmapId'
     | '/sets/$setId'
     | '/groups'
     | '/library'
@@ -189,6 +200,7 @@ export interface FileRouteTypes {
     | '/grammar/$setId'
     | '/groups/$groupId'
     | '/library/$folderId'
+    | '/roadmap_/$roadmapId'
     | '/sets/$setId'
     | '/groups/'
     | '/library/'
@@ -206,6 +218,7 @@ export interface RootRouteChildren {
   GrammarSetIdRoute: typeof GrammarSetIdRoute
   GroupsGroupIdRoute: typeof GroupsGroupIdRoute
   LibraryFolderIdRoute: typeof LibraryFolderIdRoute
+  RoadmapRoadmapIdRoute: typeof RoadmapRoadmapIdRoute
   SetsSetIdRoute: typeof SetsSetIdRoute
   GroupsIndexRoute: typeof GroupsIndexRoute
   LibraryIndexRoute: typeof LibraryIndexRoute
@@ -298,6 +311,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LibraryFolderIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/roadmap_/$roadmapId': {
+      id: '/roadmap_/$roadmapId'
+      path: '/roadmap/$roadmapId'
+      fullPath: '/roadmap/$roadmapId'
+      preLoaderRoute: typeof RoadmapRoadmapIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sets/$setId': {
       id: '/sets/$setId'
       path: '/sets/$setId'
@@ -326,6 +346,7 @@ const rootRouteChildren: RootRouteChildren = {
   GrammarSetIdRoute: GrammarSetIdRoute,
   GroupsGroupIdRoute: GroupsGroupIdRoute,
   LibraryFolderIdRoute: LibraryFolderIdRoute,
+  RoadmapRoadmapIdRoute: RoadmapRoadmapIdRoute,
   SetsSetIdRoute: SetsSetIdRoute,
   GroupsIndexRoute: GroupsIndexRoute,
   LibraryIndexRoute: LibraryIndexRoute,
