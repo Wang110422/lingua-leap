@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   Route as RouteIcon,
@@ -7,23 +7,20 @@ import {
   CalendarDays,
   Layers,
   Gauge,
-  Pin,
-  BookOpen,
-  Target,
-  ChevronRight,
 } from "lucide-react";
 
 import { PageHeader } from "@/components/app/PageHeader";
-import { Avatar, BtnPrimary, EmojiTile, Progress } from "@/components/app/ui-bits";
-import { cardSets, roadmaps } from "@/data/mock";
+import { RoadmapTree } from "@/components/app/RoadmapTree";
+import { BtnPrimary, EmojiTile, Progress } from "@/components/app/ui-bits";
+import { roadmaps, roadmapStages } from "@/data/mock";
 
 export const Route = createFileRoute("/roadmap")({
   head: () => ({
     meta: [
       { title: "Lộ trình học — LingoMaster" },
-      { name: "description", content: "Theo dõi các mốc bộ thẻ trong lộ trình học từ vựng cá nhân hóa của bạn." },
+      { name: "description", content: "Theo dõi các chặng và task trong lộ trình học từ vựng cá nhân hóa của bạn." },
       { property: "og:title", content: "Lộ trình học — LingoMaster" },
-      { property: "og:description", content: "Lộ trình học từ vựng theo mốc, có tiến độ và mức độ khó." },
+      { property: "og:description", content: "Lộ trình học chia theo chặng, có task từ vựng, ngữ pháp, kỹ năng và luyện đề." },
     ],
   }),
   component: RoadmapPage,
@@ -32,7 +29,11 @@ export const Route = createFileRoute("/roadmap")({
 function RoadmapPage() {
   const [selected, setSelected] = useState(roadmaps[0]!.id);
   const active = roadmaps.find((r) => r.id === selected) ?? roadmaps[0]!;
-  const milestones = cardSets.slice(0, active.total > 5 ? 5 : active.total);
+  const stages = roadmapStages[active.id] ?? [];
+  const allTasks = stages.flatMap((s) => s.tasks);
+  const totalDone = allTasks.filter((t) => t.status === "done").length;
+  const taskPct = allTasks.length ? Math.round((totalDone / allTasks.length) * 100) : 0;
+
 
   return (
     <div className="space-y-6">
@@ -123,51 +124,8 @@ function RoadmapPage() {
             </div>
           </section>
 
-          <section className="surface-card p-6">
-            <div className="flex flex-wrap items-center gap-3">
-              <h3 className="flex items-center gap-2 font-bold">
-                <Pin className="h-[18px] w-[18px] text-primary" /> Các mốc bộ thẻ trong lộ trình
-              </h3>
-              <span className="ml-auto text-xs text-muted-foreground">Nhấp vào mốc để bắt đầu học bộ thẻ</span>
-            </div>
+          <RoadmapTree stages={stages} />
 
-            <Link
-              to="/roadmap/$roadmapId"
-              params={{ roadmapId: active.id }}
-              className="mt-4 flex items-center justify-between rounded-2xl bg-primary px-5 py-4 text-sm font-bold text-primary-foreground transition hover:opacity-90"
-            >
-              <span>Xem cây lộ trình theo chặng &amp; task</span>
-              <ChevronRight className="h-4 w-4" />
-            </Link>
-
-            <ul className="mt-4 space-y-3">
-              {milestones.map((m, i) => (
-                <li key={m.id} className="rounded-2xl border border-border p-4 transition hover:border-primary/50">
-                  <div className="flex items-start gap-3">
-                    <span className="icon-tile font-display text-sm font-bold">#{i + 1}</span>
-                    <div className="min-w-0 flex-1">
-                      <p className="font-bold">{m.name}</p>
-                      <div className="mt-1 flex flex-wrap gap-4 text-xs text-muted-foreground">
-                        <span className="flex items-center gap-1.5">
-                          <BookOpen className="h-3.5 w-3.5" /> {m.terms} thuật ngữ
-                        </span>
-                        <span className="flex items-center gap-1.5">
-                          <Target className="h-3.5 w-3.5" /> Học: {Math.min(m.terms, 20 + i * 5)}/{m.terms} · Kiểm tra:{" "}
-                          {i < active.done ? m.terms : 0}/{m.terms}
-                        </span>
-                      </div>
-                    </div>
-                    <ChevronRight className="h-4 w-4 flex-none text-muted-foreground" />
-                  </div>
-                  <div className="mt-3 flex items-center gap-2 border-t border-border pt-3 text-xs">
-                    <Avatar initial={active.author.charAt(0)} size="sm" />
-                    <span className="text-muted-foreground">Tác giả: {active.author}</span>
-                    <span className="ml-auto font-semibold text-primary">Vào học bộ thẻ →</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </section>
         </div>
       </div>
     </div>
