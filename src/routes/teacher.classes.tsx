@@ -73,10 +73,8 @@ function TeacherClassesPage() {
         title="Lớp học"
         description="Tạo lớp, chia sẻ mã mời để sinh viên tự tham gia và theo dõi tiến độ."
         actions={
-          <BtnPrimary className="cursor-pointer" >
-            <span onClick={() => setCreating(true)} className="inline-flex items-center gap-2">
-              <Plus className="h-4 w-4" /> Tạo lớp học
-            </span>
+          <BtnPrimary onClick={() => setCreating(true)}>
+            <Plus className="h-4 w-4" /> Tạo lớp học
           </BtnPrimary>
         }
       />
@@ -132,13 +130,11 @@ function TeacherClassesPage() {
           </div>
 
           <div className="mt-5 flex justify-end gap-2">
-            <BtnOutline className="h-10 px-4">
-              <span onClick={() => setCreating(false)}>Hủy</span>
+            <BtnOutline className="h-10 px-4" onClick={() => setCreating(false)}>
+              Hủy
             </BtnOutline>
-            <BtnPrimary className="h-10 px-5">
-              <span onClick={createClass} className="inline-flex items-center gap-2">
-                <Check className="h-4 w-4" /> Tạo lớp
-              </span>
+            <BtnPrimary className="h-10 px-5" onClick={createClass}>
+              <Check className="h-4 w-4" /> Tạo lớp
             </BtnPrimary>
           </div>
         </section>
@@ -192,8 +188,8 @@ function TeacherClassesPage() {
             </div>
 
             <div className="mt-4 flex justify-end">
-              <BtnOutline className="h-10 px-4">
-                <span onClick={() => setSelectedId(c.id)}>Xem sinh viên</span>
+              <BtnOutline className="h-10 px-4" onClick={() => setSelectedId(c.id)}>
+                Xem sinh viên
               </BtnOutline>
             </div>
           </article>

@@ -23,6 +23,8 @@ import { Route as LibraryIndexRouteImport } from './routes/library.index'
 import { Route as LibraryFolderIdRouteImport } from './routes/library.$folderId'
 import { Route as RoadmapRoadmapIdRouteImport } from './routes/roadmap_.$roadmapId'
 import { Route as SetsSetIdRouteImport } from './routes/sets.$setId'
+import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
+import { Route as TeacherClassesRouteImport } from './routes/teacher.classes'
 import { Route as GrammarSetIdTestRouteImport } from './routes/grammar_.$setId.test'
 
 const IndexRoute = IndexRouteImport.update({
@@ -95,6 +97,16 @@ const SetsSetIdRoute = SetsSetIdRouteImport.update({
   path: '/sets/$setId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeacherIndexRoute = TeacherIndexRouteImport.update({
+  id: '/teacher/',
+  path: '/teacher/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeacherClassesRoute = TeacherClassesRouteImport.update({
+  id: '/teacher/classes',
+  path: '/teacher/classes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GrammarSetIdTestRoute = GrammarSetIdTestRouteImport.update({
   id: '/grammar_/$setId/test',
   path: '/grammar/$setId/test',
@@ -114,8 +126,10 @@ export interface FileRoutesByFullPath {
   '/library/$folderId': typeof LibraryFolderIdRoute
   '/roadmap/$roadmapId': typeof RoadmapRoadmapIdRoute
   '/sets/$setId': typeof SetsSetIdRoute
+  '/teacher/classes': typeof TeacherClassesRoute
   '/groups/': typeof GroupsIndexRoute
   '/library/': typeof LibraryIndexRoute
+  '/teacher/': typeof TeacherIndexRoute
   '/grammar/$setId/test': typeof GrammarSetIdTestRoute
 }
 export interface FileRoutesByTo {
@@ -131,8 +145,10 @@ export interface FileRoutesByTo {
   '/library/$folderId': typeof LibraryFolderIdRoute
   '/roadmap/$roadmapId': typeof RoadmapRoadmapIdRoute
   '/sets/$setId': typeof SetsSetIdRoute
+  '/teacher/classes': typeof TeacherClassesRoute
   '/groups': typeof GroupsIndexRoute
   '/library': typeof LibraryIndexRoute
+  '/teacher': typeof TeacherIndexRoute
   '/grammar/$setId/test': typeof GrammarSetIdTestRoute
 }
 export interface FileRoutesById {
@@ -149,8 +165,10 @@ export interface FileRoutesById {
   '/library/$folderId': typeof LibraryFolderIdRoute
   '/roadmap_/$roadmapId': typeof RoadmapRoadmapIdRoute
   '/sets/$setId': typeof SetsSetIdRoute
+  '/teacher/classes': typeof TeacherClassesRoute
   '/groups/': typeof GroupsIndexRoute
   '/library/': typeof LibraryIndexRoute
+  '/teacher/': typeof TeacherIndexRoute
   '/grammar_/$setId/test': typeof GrammarSetIdTestRoute
 }
 export interface FileRouteTypes {
@@ -168,8 +186,10 @@ export interface FileRouteTypes {
     | '/library/$folderId'
     | '/roadmap/$roadmapId'
     | '/sets/$setId'
+    | '/teacher/classes'
     | '/groups/'
     | '/library/'
+    | '/teacher/'
     | '/grammar/$setId/test'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -185,8 +205,10 @@ export interface FileRouteTypes {
     | '/library/$folderId'
     | '/roadmap/$roadmapId'
     | '/sets/$setId'
+    | '/teacher/classes'
     | '/groups'
     | '/library'
+    | '/teacher'
     | '/grammar/$setId/test'
   id:
     | '__root__'
@@ -202,8 +224,10 @@ export interface FileRouteTypes {
     | '/library/$folderId'
     | '/roadmap_/$roadmapId'
     | '/sets/$setId'
+    | '/teacher/classes'
     | '/groups/'
     | '/library/'
+    | '/teacher/'
     | '/grammar_/$setId/test'
   fileRoutesById: FileRoutesById
 }
@@ -220,8 +244,10 @@ export interface RootRouteChildren {
   LibraryFolderIdRoute: typeof LibraryFolderIdRoute
   RoadmapRoadmapIdRoute: typeof RoadmapRoadmapIdRoute
   SetsSetIdRoute: typeof SetsSetIdRoute
+  TeacherClassesRoute: typeof TeacherClassesRoute
   GroupsIndexRoute: typeof GroupsIndexRoute
   LibraryIndexRoute: typeof LibraryIndexRoute
+  TeacherIndexRoute: typeof TeacherIndexRoute
   GrammarSetIdTestRoute: typeof GrammarSetIdTestRoute
 }
 
@@ -325,6 +351,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SetsSetIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teacher/': {
+      id: '/teacher/'
+      path: '/teacher'
+      fullPath: '/teacher/'
+      preLoaderRoute: typeof TeacherIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teacher/classes': {
+      id: '/teacher/classes'
+      path: '/teacher/classes'
+      fullPath: '/teacher/classes'
+      preLoaderRoute: typeof TeacherClassesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/grammar_/$setId/test': {
       id: '/grammar_/$setId/test'
       path: '/grammar/$setId/test'
@@ -348,8 +388,10 @@ const rootRouteChildren: RootRouteChildren = {
   LibraryFolderIdRoute: LibraryFolderIdRoute,
   RoadmapRoadmapIdRoute: RoadmapRoadmapIdRoute,
   SetsSetIdRoute: SetsSetIdRoute,
+  TeacherClassesRoute: TeacherClassesRoute,
   GroupsIndexRoute: GroupsIndexRoute,
   LibraryIndexRoute: LibraryIndexRoute,
+  TeacherIndexRoute: TeacherIndexRoute,
   GrammarSetIdTestRoute: GrammarSetIdTestRoute,
 }
 export const routeTree = rootRouteImport

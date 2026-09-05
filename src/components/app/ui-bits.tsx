@@ -50,10 +50,15 @@ export function Avatar({ initial, size = "md" }: { initial: string; size?: "sm" 
   );
 }
 
-export function BtnPrimary({ children, className = "" }: { children: ReactNode; className?: string }) {
+export function BtnPrimary({
+  children,
+  className = "",
+  ...rest
+}: { children: ReactNode; className?: string } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
       type="button"
+      {...rest}
       className={`inline-flex h-11 items-center justify-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground transition hover:opacity-90 ${className}`}
     >
       {children}
@@ -65,14 +70,16 @@ export function BtnOutline({
   children,
   className = "",
   tone = "default",
+  ...rest
 }: {
   children: ReactNode;
   className?: string;
   tone?: "default" | "danger";
-}) {
+} & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
       type="button"
+      {...rest}
       className={`inline-flex h-11 items-center justify-center gap-2 rounded-full border px-5 text-sm font-semibold transition hover:bg-muted ${
         tone === "danger"
           ? "border-destructive/40 text-destructive hover:bg-destructive/10"
