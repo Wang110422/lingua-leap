@@ -25,7 +25,12 @@ import { Route as RoadmapRoadmapIdRouteImport } from './routes/roadmap_.$roadmap
 import { Route as SetsSetIdRouteImport } from './routes/sets.$setId'
 import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
 import { Route as TeacherClassesRouteImport } from './routes/teacher.classes'
+import { Route as TeacherFoldersRouteImport } from './routes/teacher.folders'
+import { Route as TeacherLessonsRouteImport } from './routes/teacher.lessons'
+import { Route as TeacherTrashRouteImport } from './routes/teacher.trash'
 import { Route as GrammarSetIdTestRouteImport } from './routes/grammar_.$setId.test'
+import { Route as TeacherExamsIndexRouteImport } from './routes/teacher.exams.index'
+import { Route as TeacherExamsExamIdRouteImport } from './routes/teacher.exams.$examId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -107,9 +112,34 @@ const TeacherClassesRoute = TeacherClassesRouteImport.update({
   path: '/teacher/classes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeacherFoldersRoute = TeacherFoldersRouteImport.update({
+  id: '/teacher/folders',
+  path: '/teacher/folders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeacherLessonsRoute = TeacherLessonsRouteImport.update({
+  id: '/teacher/lessons',
+  path: '/teacher/lessons',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeacherTrashRoute = TeacherTrashRouteImport.update({
+  id: '/teacher/trash',
+  path: '/teacher/trash',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GrammarSetIdTestRoute = GrammarSetIdTestRouteImport.update({
   id: '/grammar_/$setId/test',
   path: '/grammar/$setId/test',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeacherExamsIndexRoute = TeacherExamsIndexRouteImport.update({
+  id: '/teacher/exams/',
+  path: '/teacher/exams/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeacherExamsExamIdRoute = TeacherExamsExamIdRouteImport.update({
+  id: '/teacher/exams/$examId',
+  path: '/teacher/exams/$examId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -127,10 +157,15 @@ export interface FileRoutesByFullPath {
   '/roadmap/$roadmapId': typeof RoadmapRoadmapIdRoute
   '/sets/$setId': typeof SetsSetIdRoute
   '/teacher/classes': typeof TeacherClassesRoute
+  '/teacher/folders': typeof TeacherFoldersRoute
+  '/teacher/lessons': typeof TeacherLessonsRoute
+  '/teacher/trash': typeof TeacherTrashRoute
   '/groups/': typeof GroupsIndexRoute
   '/library/': typeof LibraryIndexRoute
   '/teacher/': typeof TeacherIndexRoute
   '/grammar/$setId/test': typeof GrammarSetIdTestRoute
+  '/teacher/exams/$examId': typeof TeacherExamsExamIdRoute
+  '/teacher/exams/': typeof TeacherExamsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -146,10 +181,15 @@ export interface FileRoutesByTo {
   '/roadmap/$roadmapId': typeof RoadmapRoadmapIdRoute
   '/sets/$setId': typeof SetsSetIdRoute
   '/teacher/classes': typeof TeacherClassesRoute
+  '/teacher/folders': typeof TeacherFoldersRoute
+  '/teacher/lessons': typeof TeacherLessonsRoute
+  '/teacher/trash': typeof TeacherTrashRoute
   '/groups': typeof GroupsIndexRoute
   '/library': typeof LibraryIndexRoute
   '/teacher': typeof TeacherIndexRoute
   '/grammar/$setId/test': typeof GrammarSetIdTestRoute
+  '/teacher/exams/$examId': typeof TeacherExamsExamIdRoute
+  '/teacher/exams': typeof TeacherExamsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -166,10 +206,15 @@ export interface FileRoutesById {
   '/roadmap_/$roadmapId': typeof RoadmapRoadmapIdRoute
   '/sets/$setId': typeof SetsSetIdRoute
   '/teacher/classes': typeof TeacherClassesRoute
+  '/teacher/folders': typeof TeacherFoldersRoute
+  '/teacher/lessons': typeof TeacherLessonsRoute
+  '/teacher/trash': typeof TeacherTrashRoute
   '/groups/': typeof GroupsIndexRoute
   '/library/': typeof LibraryIndexRoute
   '/teacher/': typeof TeacherIndexRoute
   '/grammar_/$setId/test': typeof GrammarSetIdTestRoute
+  '/teacher/exams/$examId': typeof TeacherExamsExamIdRoute
+  '/teacher/exams/': typeof TeacherExamsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -187,10 +232,15 @@ export interface FileRouteTypes {
     | '/roadmap/$roadmapId'
     | '/sets/$setId'
     | '/teacher/classes'
+    | '/teacher/folders'
+    | '/teacher/lessons'
+    | '/teacher/trash'
     | '/groups/'
     | '/library/'
     | '/teacher/'
     | '/grammar/$setId/test'
+    | '/teacher/exams/$examId'
+    | '/teacher/exams/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -206,10 +256,15 @@ export interface FileRouteTypes {
     | '/roadmap/$roadmapId'
     | '/sets/$setId'
     | '/teacher/classes'
+    | '/teacher/folders'
+    | '/teacher/lessons'
+    | '/teacher/trash'
     | '/groups'
     | '/library'
     | '/teacher'
     | '/grammar/$setId/test'
+    | '/teacher/exams/$examId'
+    | '/teacher/exams'
   id:
     | '__root__'
     | '/'
@@ -225,10 +280,15 @@ export interface FileRouteTypes {
     | '/roadmap_/$roadmapId'
     | '/sets/$setId'
     | '/teacher/classes'
+    | '/teacher/folders'
+    | '/teacher/lessons'
+    | '/teacher/trash'
     | '/groups/'
     | '/library/'
     | '/teacher/'
     | '/grammar_/$setId/test'
+    | '/teacher/exams/$examId'
+    | '/teacher/exams/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -245,10 +305,15 @@ export interface RootRouteChildren {
   RoadmapRoadmapIdRoute: typeof RoadmapRoadmapIdRoute
   SetsSetIdRoute: typeof SetsSetIdRoute
   TeacherClassesRoute: typeof TeacherClassesRoute
+  TeacherFoldersRoute: typeof TeacherFoldersRoute
+  TeacherLessonsRoute: typeof TeacherLessonsRoute
+  TeacherTrashRoute: typeof TeacherTrashRoute
   GroupsIndexRoute: typeof GroupsIndexRoute
   LibraryIndexRoute: typeof LibraryIndexRoute
   TeacherIndexRoute: typeof TeacherIndexRoute
   GrammarSetIdTestRoute: typeof GrammarSetIdTestRoute
+  TeacherExamsExamIdRoute: typeof TeacherExamsExamIdRoute
+  TeacherExamsIndexRoute: typeof TeacherExamsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -365,11 +430,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeacherClassesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teacher/folders': {
+      id: '/teacher/folders'
+      path: '/teacher/folders'
+      fullPath: '/teacher/folders'
+      preLoaderRoute: typeof TeacherFoldersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teacher/lessons': {
+      id: '/teacher/lessons'
+      path: '/teacher/lessons'
+      fullPath: '/teacher/lessons'
+      preLoaderRoute: typeof TeacherLessonsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teacher/trash': {
+      id: '/teacher/trash'
+      path: '/teacher/trash'
+      fullPath: '/teacher/trash'
+      preLoaderRoute: typeof TeacherTrashRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/grammar_/$setId/test': {
       id: '/grammar_/$setId/test'
       path: '/grammar/$setId/test'
       fullPath: '/grammar/$setId/test'
       preLoaderRoute: typeof GrammarSetIdTestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teacher/exams/': {
+      id: '/teacher/exams/'
+      path: '/teacher/exams'
+      fullPath: '/teacher/exams/'
+      preLoaderRoute: typeof TeacherExamsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teacher/exams/$examId': {
+      id: '/teacher/exams/$examId'
+      path: '/teacher/exams/$examId'
+      fullPath: '/teacher/exams/$examId'
+      preLoaderRoute: typeof TeacherExamsExamIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -389,10 +489,15 @@ const rootRouteChildren: RootRouteChildren = {
   RoadmapRoadmapIdRoute: RoadmapRoadmapIdRoute,
   SetsSetIdRoute: SetsSetIdRoute,
   TeacherClassesRoute: TeacherClassesRoute,
+  TeacherFoldersRoute: TeacherFoldersRoute,
+  TeacherLessonsRoute: TeacherLessonsRoute,
+  TeacherTrashRoute: TeacherTrashRoute,
   GroupsIndexRoute: GroupsIndexRoute,
   LibraryIndexRoute: LibraryIndexRoute,
   TeacherIndexRoute: TeacherIndexRoute,
   GrammarSetIdTestRoute: GrammarSetIdTestRoute,
+  TeacherExamsExamIdRoute: TeacherExamsExamIdRoute,
+  TeacherExamsIndexRoute: TeacherExamsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
