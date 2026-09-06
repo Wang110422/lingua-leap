@@ -27,6 +27,7 @@ import { Route as TeacherIndexRouteImport } from './routes/teacher.index'
 import { Route as TeacherClassesRouteImport } from './routes/teacher.classes'
 import { Route as TeacherFoldersRouteImport } from './routes/teacher.folders'
 import { Route as TeacherLessonsRouteImport } from './routes/teacher.lessons'
+import { Route as TeacherScanRouteImport } from './routes/teacher.scan'
 import { Route as TeacherTrashRouteImport } from './routes/teacher.trash'
 import { Route as GrammarSetIdTestRouteImport } from './routes/grammar_.$setId.test'
 import { Route as TeacherExamsIndexRouteImport } from './routes/teacher.exams.index'
@@ -122,6 +123,11 @@ const TeacherLessonsRoute = TeacherLessonsRouteImport.update({
   path: '/teacher/lessons',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeacherScanRoute = TeacherScanRouteImport.update({
+  id: '/teacher/scan',
+  path: '/teacher/scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeacherTrashRoute = TeacherTrashRouteImport.update({
   id: '/teacher/trash',
   path: '/teacher/trash',
@@ -159,6 +165,7 @@ export interface FileRoutesByFullPath {
   '/teacher/classes': typeof TeacherClassesRoute
   '/teacher/folders': typeof TeacherFoldersRoute
   '/teacher/lessons': typeof TeacherLessonsRoute
+  '/teacher/scan': typeof TeacherScanRoute
   '/teacher/trash': typeof TeacherTrashRoute
   '/groups/': typeof GroupsIndexRoute
   '/library/': typeof LibraryIndexRoute
@@ -183,6 +190,7 @@ export interface FileRoutesByTo {
   '/teacher/classes': typeof TeacherClassesRoute
   '/teacher/folders': typeof TeacherFoldersRoute
   '/teacher/lessons': typeof TeacherLessonsRoute
+  '/teacher/scan': typeof TeacherScanRoute
   '/teacher/trash': typeof TeacherTrashRoute
   '/groups': typeof GroupsIndexRoute
   '/library': typeof LibraryIndexRoute
@@ -208,6 +216,7 @@ export interface FileRoutesById {
   '/teacher/classes': typeof TeacherClassesRoute
   '/teacher/folders': typeof TeacherFoldersRoute
   '/teacher/lessons': typeof TeacherLessonsRoute
+  '/teacher/scan': typeof TeacherScanRoute
   '/teacher/trash': typeof TeacherTrashRoute
   '/groups/': typeof GroupsIndexRoute
   '/library/': typeof LibraryIndexRoute
@@ -234,6 +243,7 @@ export interface FileRouteTypes {
     | '/teacher/classes'
     | '/teacher/folders'
     | '/teacher/lessons'
+    | '/teacher/scan'
     | '/teacher/trash'
     | '/groups/'
     | '/library/'
@@ -258,6 +268,7 @@ export interface FileRouteTypes {
     | '/teacher/classes'
     | '/teacher/folders'
     | '/teacher/lessons'
+    | '/teacher/scan'
     | '/teacher/trash'
     | '/groups'
     | '/library'
@@ -282,6 +293,7 @@ export interface FileRouteTypes {
     | '/teacher/classes'
     | '/teacher/folders'
     | '/teacher/lessons'
+    | '/teacher/scan'
     | '/teacher/trash'
     | '/groups/'
     | '/library/'
@@ -307,6 +319,7 @@ export interface RootRouteChildren {
   TeacherClassesRoute: typeof TeacherClassesRoute
   TeacherFoldersRoute: typeof TeacherFoldersRoute
   TeacherLessonsRoute: typeof TeacherLessonsRoute
+  TeacherScanRoute: typeof TeacherScanRoute
   TeacherTrashRoute: typeof TeacherTrashRoute
   GroupsIndexRoute: typeof GroupsIndexRoute
   LibraryIndexRoute: typeof LibraryIndexRoute
@@ -444,6 +457,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TeacherLessonsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teacher/scan': {
+      id: '/teacher/scan'
+      path: '/teacher/scan'
+      fullPath: '/teacher/scan'
+      preLoaderRoute: typeof TeacherScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/teacher/trash': {
       id: '/teacher/trash'
       path: '/teacher/trash'
@@ -491,6 +511,7 @@ const rootRouteChildren: RootRouteChildren = {
   TeacherClassesRoute: TeacherClassesRoute,
   TeacherFoldersRoute: TeacherFoldersRoute,
   TeacherLessonsRoute: TeacherLessonsRoute,
+  TeacherScanRoute: TeacherScanRoute,
   TeacherTrashRoute: TeacherTrashRoute,
   GroupsIndexRoute: GroupsIndexRoute,
   LibraryIndexRoute: LibraryIndexRoute,
