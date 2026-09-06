@@ -116,7 +116,7 @@ function TeacherScanPage() {
                 >
                   <div className="min-w-0 flex-1">
                     <p className="truncate font-semibold">{v.word}</p>
-                    <p className="truncate text-xs text-muted-foreground">{v.meaning}</p>
+                    <p className="truncate text-xs text-muted-foreground">{v.vi}</p>
                   </div>
                   <Pill tone="muted">{v.cefr}</Pill>
                   {on && <Check className="h-4 w-4 text-primary" />}
